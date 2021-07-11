@@ -18,7 +18,7 @@ const useFetch = () => {
         setTimeout(() => {
           setData(dataApi);
           setStatus({ loading: false, errors: false });
-        }, 1000);
+        }, 3000);
       } catch (error) {
         setStatus({
           loading: false,
