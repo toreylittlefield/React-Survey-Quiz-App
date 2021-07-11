@@ -8,6 +8,10 @@ const bodyStyles = {
   overFlow: 'hidden',
 };
 
+const stylesHidden = `
+  height: 100vh;
+`;
+
 const ContainerWrapper = styled.div`
   font-family: 'Ubuntu', sans-serif;
   display: flex;
@@ -16,7 +20,7 @@ const ContainerWrapper = styled.div`
   justify-content: center;
   overflow: hidden;
   margin: 0;
-  ${({ isloading }) => (isloading ? 'height: 100vh' : '')};
+  ${({ isloading }) => (isloading ? stylesHidden : '')};
 `;
 
 function App() {

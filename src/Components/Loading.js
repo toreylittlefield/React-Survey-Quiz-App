@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import loadingImage from '../Assets/Media/choose.svg';
 
-const LoaddingWrapper = styled.div`
-  background: url(${loadingImage}) no-repeat center center/cover;
+const LoadingWrapper = styled.div`
+  background: url(${loadingImage}) no-repeat left center/cover;
   background-color: #000000;
   position: absolute;
-  top: -30px;
-  left: -30px;
+  overflow: hidden;
   width: calc(100vw + 60px);
   height: calc(100vh + 60px);
   z-index: -1;
@@ -49,7 +48,7 @@ function Loading() {
   }, []);
   return (
     <React.Fragment>
-      <LoaddingWrapper />
+      <LoadingWrapper />
       <LoadingMessage>{`Loading ${loadingProgress}%...`}</LoadingMessage>
     </React.Fragment>
   );
