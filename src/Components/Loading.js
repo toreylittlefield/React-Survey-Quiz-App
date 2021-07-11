@@ -2,14 +2,28 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import loadingImage from '../Assets/Media/choose.svg';
 
-const blurIn = keyframes`
+const blurIn = (amountBlur1 = 100, amountBlur2) => keyframes`
   0% {
-    filter: blur(100px);
+    filter: blur(${amountBlur1}px);
+  }
+  ${
+    amountBlur2 &&
+    `40% {
+    filter: blur(30px)
+  }
+  60% {
+    filter: blur(0px)
+  }`
   }
   100% {
     filter: blur(0px);
-    color: black;
   }
+`;
+
+const blurAnimation = ({ time, option }) => css`
+  ${time} linear ${option} ${option === 'infinite'
+    ? blurIn('100', true)
+    : blurIn()};
 `;
 
 const LoadingWrapper = styled.div`
@@ -21,9 +35,15 @@ const LoadingWrapper = styled.div`
   height: calc(100vh + 60px);
   z-index: -1;
   filter: blur(100px);
-  animation: 2.9s linear forwards ${blurIn};
+  animation: ${({ wait }) => {
+    if (wait > 200) {
+      return blurAnimation({ time: `5s`, option: 'infinite' });
+    }
+    return blurAnimation({ time: `2.8s`, option: 'forwards' });
+  }};
 `;
 
+// animation: 2.9s linear infinite ${blurIn};
 const fadeIn = keyframes`
   0% {
     opacity: 1;
@@ -67,12 +87,13 @@ function Loading() {
     };
   }, []);
 
+  const message =
+    wait > 1000 ? `Still Loading hmm... 🤔` : `Loading ${loadingProgress}%...`;
+
   return (
     <React.Fragment>
-      <LoadingWrapper />
-      <LoadingMessage
-        wait={wait}
-      >{`Loading ${loadingProgress}%...`}</LoadingMessage>
+      <LoadingWrapper wait={wait} />
+      <LoadingMessage wait={wait}>{message}</LoadingMessage>
     </React.Fragment>
   );
 }

@@ -14,11 +14,11 @@ const useFetch = () => {
           });
           return;
         }
-        const dataApi = await data.json();
-        setTimeout(() => {
+        setTimeout(async () => {
+          const dataApi = await data.json();
           setData(dataApi);
           setStatus({ loading: false, errors: false });
-        }, 3000);
+        }, 20000);
       } catch (error) {
         setStatus({
           loading: false,
