@@ -11,8 +11,10 @@ const useFetch = () => {
         return;
       }
       const dataApi = await data.json();
-      setData(dataApi);
-      setStatus({ loading: false, error: false });
+      setTimeout(() => {
+        setData(dataApi);
+        setStatus({ loading: false, error: false });
+      }, 300);
     };
     wrapper();
   }, []);
