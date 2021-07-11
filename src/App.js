@@ -4,9 +4,8 @@ import useFetch from './Api/useFetch';
 import { Loading } from './Components/';
 
 const bodyStyles = {
-  // backgroundColor: '#f5f5f5',
-  // width: '100%',
-  // padding: 50,
+  margin: 0,
+  overFlow: 'hidden',
 };
 
 const ContainerWrapper = styled.div`
