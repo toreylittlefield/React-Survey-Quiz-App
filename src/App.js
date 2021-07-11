@@ -142,12 +142,14 @@ function App() {
                 </section>
               );
             })}
+            {/* Submit Answers Button */}
             <button
               disabled={!data.length}
               onClick={() => setShowAnswers(true)}
             >
               Submit
             </button>
+            {/* End Submit Answers Button */}
             {/* Button To Clear & Try Again */}
             {showAnswers && (
               <button
