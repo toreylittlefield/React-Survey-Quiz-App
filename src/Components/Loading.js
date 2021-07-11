@@ -16,7 +16,7 @@ const LoaddingWrapper = styled.div`
 
 const fadeIn = keyframes`
   0% {
-    opacity: 0;
+    opacity: .05;
   }
   100% {
     opacity: 1;
@@ -24,7 +24,8 @@ const fadeIn = keyframes`
 `;
 
 const LoadingMessage = styled.h2`
-  font-size: 50px;
+  text-align: center;
+  font-size: 5rem;
   color: #fff;
   animation: 1s linear infinite alternate ${fadeIn};
 `;
@@ -41,7 +42,7 @@ function Loading() {
       if (count > 99) return;
       count++;
       setLoadingProgress((prev) => prev + 1);
-    }, 25);
+    }, 15);
     return () => {
       clearInterval(timer);
     };
