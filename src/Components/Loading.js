@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import loadingImage from '../Assets/Media/choose.svg';
 
@@ -34,10 +34,22 @@ const LoadingMessage = styled.h2`
 // };
 
 function Loading() {
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  useEffect(() => {
+    let count = 0;
+    const timer = setInterval(() => {
+      if (count > 99) return;
+      count++;
+      setLoadingProgress((prev) => prev + 1);
+    }, 25);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   return (
     <React.Fragment>
       <LoaddingWrapper />
-      <LoadingMessage>Loading...</LoadingMessage>
+      <LoadingMessage>{`Loading ${loadingProgress}%...`}</LoadingMessage>
     </React.Fragment>
   );
 }
