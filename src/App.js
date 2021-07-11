@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useFetch from './Api/useFetch';
+import { Loading } from './Components/';
 
 const bodyStyles = {
   backgroundColor: '#f5f5f5',
@@ -45,7 +46,7 @@ function App() {
   return (
     <div className="App" style={bodyStyles}>
       {data.loading ? (
-        <div>Loading</div>
+        <Loading></Loading>
       ) : (
         <React.Fragment>
           {/* Vocab Quiz Title Section */}
