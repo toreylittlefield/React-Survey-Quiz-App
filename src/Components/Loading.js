@@ -29,9 +29,9 @@ const LoadingMessage = styled.h2`
   animation: 1s linear infinite alternate ${fadeIn};
 `;
 
-const scale = (num, in_min, in_max, out_min, out_max) => {
-  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
-};
+// const scale = (num, in_min, in_max, out_min, out_max) => {
+//   return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+// };
 
 function Loading() {
   return (
