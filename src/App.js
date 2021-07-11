@@ -3,7 +3,8 @@ import useFetch from './Api/useFetch';
 
 const bodyStyles = {
   backgroundColor: '#f5f5f5',
-  width: '80vw',
+  width: '100%',
+  padding: 50,
 };
 
 function App() {
