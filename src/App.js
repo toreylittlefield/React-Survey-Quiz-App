@@ -17,12 +17,11 @@ const ContainerWrapper = styled.div`
   justify-content: center;
   overflow: hidden;
   margin: 0;
-  ${({ loading }) => (loading === true ? 'height: 100vh' : '')};
+  ${({ isloading }) => (isloading ? 'height: 100vh' : '')};
 `;
 
 function App() {
-  const [data, loading, error] = useFetch();
-  console.log({ data, loading, error });
+  const [data, loading, { isError, errorMessage }] = useFetch();
 
   useEffect(() => {
     if (!data.length) return;
@@ -58,7 +57,8 @@ function App() {
 
   return (
     <div className="App" style={bodyStyles}>
-      <ContainerWrapper loading={`${loading}`}>
+      <ContainerWrapper isloading={loading}>
+        {isError && <div>{errorMessage.toString()}</div>}
         {loading ? (
           <Loading />
         ) : (
@@ -143,7 +143,12 @@ function App() {
                 </section>
               );
             })}
-            <button onClick={() => setShowAnswers(true)}>Submit</button>
+            <button
+              disabled={!data.length}
+              onClick={() => setShowAnswers(true)}
+            >
+              Submit
+            </button>
             {/* Button To Clear & Try Again */}
             {showAnswers && (
               <button
