@@ -1,16 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const style = {
-  width: '100%',
-  height: '100vh',
-  textAlign: 'center',
-};
+const LoaddingWrapper = styled.div`
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: calc(100vw + 60px);
+  height: calc(100vh + 60px);
+  z-index: -1;
+  filter: blur(0px);
+`;
 
 function Loading() {
   return (
-    <div style={style}>
+    <React.Fragment>
+      <LoaddingWrapper />
       <h2>Loading...</h2>
-    </div>
+    </React.Fragment>
   );
 }
 
