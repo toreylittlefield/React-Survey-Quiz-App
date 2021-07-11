@@ -88,7 +88,7 @@ function Loading() {
   }, []);
 
   const message =
-    wait > 1000 ? `Still Loading hmm... 🤔` : `Loading ${loadingProgress}%...`;
+    wait > 1000 ? `Well this is odd.. 🤔` : `Loading ${loadingProgress}%...`;
 
   return (
     <React.Fragment>
