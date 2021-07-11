@@ -25,10 +25,7 @@ const useFetch = () => {
     error: false,
   });
 
-  if (status.loading || status.error) {
-    return [status, setStatus];
-  }
-  return [data, setData];
+  return [data, status.loading, status.error, setData];
 };
 
 export default useFetch;
