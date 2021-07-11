@@ -1,70 +1,205 @@
-# Getting Started with Create React App
+<p align="center">
+  <a href="https://github.com/toreylittlefield/React-Survey-Quiz-App/blob/master/files/React-Quiz-App-Screenshot.png" rel="noopener">
+ <img height=200px src="https://raw.githubusercontent.com/toreylittlefield/React-Survey-Quiz-App/master/files/React-Quiz-App-Screenshot.png" alt="Project logo"></a>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">React Quiz App</h3>
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/toreylittlefield/React-Survey-Quiz-App.svg)](https://github.com/toreylittlefield/React-Survey-Quiz-App/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/toreylittlefield/React-Survey-Quiz-App.svg)](https://github.com/toreylittlefield/React-Survey-Quiz-App/pulls)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/75d4747b-85ce-4fa7-8ba5-769a47fac224/deploy-status)](https://app.netlify.com/sites/quadrant-basic-test/deploys)
 
-### `yarn start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center"> A practical challenge creating a basic form component for a eCommerce CRM using React with Node.js and GraphQL
+    <br>
+</p>
 
-### `yarn test`
+## 📝 Table of Contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [View Live Site](#live-site)
+- [Quick Start](#quick-start)
+- [About](#about)
+<!-- - [System Architecture](#architecture)
+- [File Structure](#file-structure) -->
+- [Getting Started](#getting_started)
+- [Testing](#tests)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Built Using](#built_using)
+- [Authors](#authorsupdate
+  <!-- - [Acknowledgments](#acknowledgement) -->
+    <!-- - [TODO](../TODO.md) -->
+    <!-- - [Contributing](../CONTRIBUTING.md) -->
 
-### `yarn build`
+## ▶️ View Live Site <a name = "live-site"></a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+See the live project @ [https://torey-react-quiz-app.netlify.app/](https://torey-react-quiz-app.netlify.app/) hosted on Netlify
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ce8525ea-dcd9-4770-8bcd-df526ac6db5a/deploy-status)](https://app.netlify.com/sites/torey-react-quiz-app/deploys)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 💨 Quick Start <a name = "quick-start"></a>
 
-### `yarn eject`
+_Requires npm and node_
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+###### Run:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+git clone https://github.com/toreylittlefield/React-Survey-Quiz-App.git
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+cd React-Survey-Quiz-App
+npm install
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🧐 About <a name = "about"></a>
 
-## Learn More
+This project builds a quiz app in React. The quizzes are multiple choice answers and the questions & answer data are fetch from an API.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<!-- ## 📁 File Structure <a name = "file-structure"></a> -->
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- #### Frontend
 
-### Code Splitting
+```
+├ client/
+├── src/
+| ├── components/
+| | ├── Buttons/...
+| | ├── ImageLoader/...
+| | ├── Inputs/...
+| | ├── Navs/...
+| | └── index.js // <- All Styled Components
+| |
+| ├── utils/
+| |  └── ... <- All Utilities
+| |
+| ├── ui/
+| | ├── globalstyles.js <- For Global themeing
+| | └── ...
+| |
+| ├── screens/
+| |  └── MainPage.js <- Only Page View
+| |
+| ├── Apollo/ <-- Apollo GraphQL Services
+| | ├── queries.js
+| | └── mutations.js
+| |
+| ├── assets/ <-- Icons/Images
+| | ├── images/...
+| | └── icons/...
+| |
+| └── __tests__/ <- Our Client Tests
+|  ├── ...test.js
+|  └── App.test.js
+|
+├── App.js <- React App & Apollo Client Instance
+└── public/
+  └── index.html
+``` -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-### Analyzing the Bundle Size
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Prerequisites
 
-### Making a Progressive Web App
+System Requirements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- npm v6.14.5+
+- Node.js v12.18+
 
-### Advanced Configuration
+To check Node & npm versions run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+npm -v
+node -v
+```
 
-### Deployment
+For installation & downloading Node.js & npm see:
+[Setup Node & npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Installing
 
-### `yarn build` fails to minify
+Local Development Installation Instructions Are As Follows
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Clone the repo:
+
+```
+git clone https://github.com/toreylittlefield/React-Survey-Quiz-App.git
+```
+
+- Open the directory
+
+```
+cd quadrant-basic-test-challenge
+```
+
+##### Client (Frontend)
+
+To run the React App client on port 3000
+
+- Open the terminal at the root project directory & run
+
+```
+cd client
+npm install
+npm start
+```
+
+Then open the developer React server @ http://localhost:3000/
+
+## 🔧 Running the tests <a name = "tests"></a>
+
+Explain how to run the automated tests for this system.
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## 🎈 Usage <a name="usage"></a>
+
+Add notes about how to use the system.
+
+## 🚀 Deployment <a name = "deployment"></a>
+
+Add additional notes about how to deploy this on a live system.
+
+## ⛏️ Built Using <a name = "built_using"></a>
+
+##### Frontend
+
+- [Styled Components](https://styled-components.com/) - CSS-in-JS Styling Library
+- [React](https://reactjs.org/) - UI JS Library -> \_Created with [create-react-app](https://github.com/facebookincubator/create-react-app)
+<!-- - [Material UI](https://material-ui.com/) - React Component Library -->
+
+## ✍️ Authors <a name = "authors"></a>
+
+- [@toreylittlefield](https://github.com/toreylittlefield) - The one who completed this project
+
+<!-- See also the list of [contributors](https://github.com/toreylittlefield/React-Survey-Quiz-App/contributors) who participated in this project. -->
+
+<!-- ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+-  -->
+<!-- - Hat tip to anyone whose code was used
+- Inspiration
+- References -->
