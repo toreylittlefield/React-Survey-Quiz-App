@@ -15,7 +15,7 @@ const loadingAnimation = ({ time, alternate }) => css`
 const LoadingMessage = styled.h2`
   text-align: center;
   font-size: 5rem;
-  color: #fff;
+  color: ${({ theme }) => theme.primaryFontColor};
   opacity: 0;
   animation: ${({ wait }) => {
     if (wait > 200) {
