@@ -16,7 +16,7 @@
 
 ---
 
-<p align="center"> A practical challenge creating a basic form component for a eCommerce CRM using React with Node.js and GraphQL
+<p align="center"> A multiple choice quiz app built with React and styled-components. Tracks users progress, user answers, and total score on submission.
     <br>
 </p>
 
