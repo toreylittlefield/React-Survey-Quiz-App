@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useFetch from './Api/useFetch';
-import { Loading } from './Components/';
+import { Loading, ProgressBar } from './Components/';
 
 const bodyStyles = {
   margin: 0,
@@ -53,11 +53,6 @@ function App() {
   const handleCalcScore = () =>
     numCorrectAnswers.reduce((acc, val) => acc + val, 0);
 
-  const calcProgress = () =>
-    Math.round((progress.length / quizQuestions.length) * 100);
-
-  const testData = { bgcolor: '#6a1b9a', completed: calcProgress() };
-
   return (
     <div className="App" style={bodyStyles}>
       <ContainerWrapper isloading={loading}>
@@ -73,16 +68,10 @@ function App() {
               </header>
 
               {/* Progress Bar */}
-              <div>
-                <h3>{`Progress: ${calcProgress()}%`}</h3>
-                <div>Updating the progress</div>
-                <div style={{ width: 100 }}>
-                  <ProgressBar
-                    bgcolor={testData.bgcolor}
-                    completed={testData.completed}
-                  />
-                </div>
-              </div>
+              <ProgressBar
+                progress={progress.length}
+                quizQuestions={quizQuestions.length}
+              />
               {/* End Progress Bar */}
             </section>
             {/* End Vocab Quiz Title Section */}
@@ -229,37 +218,3 @@ function App() {
 }
 
 export default App;
-
-const ProgressBar = (props) => {
-  const { bgcolor, completed } = props;
-
-  const containerStyles = {
-    height: 20,
-    width: '100%',
-    backgroundColor: '#e0e0de',
-    borderRadius: 50,
-    margin: 10,
-  };
-
-  const fillerStyles = {
-    height: '100%',
-    width: `${completed}%`,
-    backgroundColor: bgcolor,
-    borderRadius: 'inherit',
-    textAlign: 'right',
-  };
-
-  const labelStyles = {
-    padding: 5,
-    color: 'white',
-    fontWeight: 'bold',
-  };
-
-  return (
-    <div style={containerStyles}>
-      <div style={fillerStyles}>
-        <span style={labelStyles}>{`${completed}%`}</span>
-      </div>
-    </div>
-  );
-};
