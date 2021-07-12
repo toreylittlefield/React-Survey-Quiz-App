@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useFetch from './Api/useFetch';
-import { Loading, ProgressBar, QuizTitle } from './Components/';
+import {
+  Loading,
+  ProgressBar,
+  QuizTitle,
+  QuizItems,
+  QuizChoices,
+} from './Components/';
 
 const bodyStyles = {
   margin: 0,
@@ -53,6 +59,15 @@ function App() {
   const handleCalcScore = () =>
     numCorrectAnswers.reduce((acc, val) => acc + val, 0);
 
+  const props = {
+    showAnswers,
+    setNumberCorrectAnswers,
+    numCorrectAnswers,
+    setProgress,
+    choicesSelected,
+    setchoicesSelected,
+  };
+
   return (
     <div className="App" style={bodyStyles}>
       <ContainerWrapper isloading={loading}>
@@ -69,65 +84,9 @@ function App() {
             </QuizTitle>
 
             {/* Quiz Item */}
-            {quizQuestions.map((quizQuestion = {}, quizIdx) => {
-              const { id, word, choices, correctChoiceIndex } = quizQuestion;
-              return (
-                <section key={id + correctChoiceIndex} style={{ width: 300 }}>
-                  <div>
-                    <h2>{word}</h2>
-                    {/* Quiz Questions */}
-                    {choices.map((choice, choiceIdx) => (
-                      <div key={id + choice.text}>
-                        <label>
-                          <input
-                            name={id}
-                            type="radio"
-                            value={choice.text}
-                            disabled={showAnswers}
-                            onClick={() => {
-                              setNumberCorrectAnswers(
-                                numCorrectAnswers.map((answer, answerIdx) => {
-                                  if (answerIdx === quizIdx) {
-                                    return choiceIdx === correctChoiceIndex
-                                      ? 1
-                                      : 0;
-                                  }
-                                  return answer;
-                                })
-                              );
-                              setProgress((prev) => {
-                                if (
-                                  choicesSelected[quizIdx][`quizid${id}`] ===
-                                  null
-                                ) {
-                                  return prev + 1;
-                                }
-                                return prev;
-                              });
-                              setchoicesSelected(
-                                choicesSelected.map((quiz) => {
-                                  const quizId = Object.keys(quiz).toString();
-                                  const currentId = `quizid${id}`;
-
-                                  if (quizId === currentId) {
-                                    return {
-                                      [`quizid${id}`]: choiceIdx,
-                                    };
-                                  }
-                                  return quiz;
-                                })
-                              );
-                            }}
-                          />
-                          {choice.text}
-                        </label>
-                      </div>
-                    ))}
-                    {/* End Quiz Questions */}
-                  </div>
-                </section>
-              );
-            })}
+            <QuizItems {...{ quizQuestions, ...props }}>
+              <QuizChoices />
+            </QuizItems>
             {/* Submit Answers Button */}
             <button
               disabled={!data.length}
