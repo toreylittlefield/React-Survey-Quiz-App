@@ -1,16 +1,16 @@
 import React from 'react';
 
 const QuizChoices = ({
-  id,
-  choices,
-  correctChoiceIndex,
-  quizIdx,
-  showAnswers,
-  setNumberCorrectAnswers,
-  numCorrectAnswers,
-  setProgress,
-  choicesSelected,
-  setchoicesSelected,
+  id = 0,
+  choices = [],
+  correctChoiceIndex = 0,
+  quizIdx = 0,
+  showAnswers = false,
+  setNumberCorrectAnswers = () => {},
+  numCorrectAnswers = [],
+  setProgress = [],
+  choicesSelected = [{}],
+  setchoicesSelected = () => {},
 }) => {
   return (
     <React.Fragment>
