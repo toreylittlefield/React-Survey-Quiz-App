@@ -28,12 +28,12 @@ const blurAnimation = ({ time, option }) => css`
 
 const LoadingWrapper = styled.div`
   background: url(${loadingImage}) no-repeat left center/cover;
-  background-color: #000000;
+  background-color: ${({ theme }) => theme.primaryBgColor};
   position: absolute;
   overflow: hidden;
   width: calc(100vw + 60px);
   height: calc(100vh + 60px);
-  z-index: -1;
+  z-index: 0;
   filter: blur(100px);
   animation: ${({ wait }) => {
     if (wait > 200) {
