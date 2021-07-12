@@ -6,7 +6,7 @@ import useLoadingHook from './useLoadingHook';
 // // Variables For Timing
 const SWITCH_MESSAGE_ON_COUNT = 1000;
 
-const Loading = () => {
+const Loading = ({ children = [] }) => {
   const [loadingProgress, wait] = useLoadingHook();
 
   const message =
@@ -18,6 +18,7 @@ const Loading = () => {
     <React.Fragment>
       <LoadingWrapper wait={wait} />
       <LoadingMessage wait={wait}>{message}</LoadingMessage>
+      {children}
     </React.Fragment>
   );
 };
