@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useFetch from './Api/useFetch';
 import {
+  Body,
   Loading,
   ProgressBar,
   QuizTitle,
   QuizItems,
   QuizChoices,
+  Button,
 } from './Components/';
-
-const bodyStyles = {
-  margin: 0,
-  overFlow: 'hidden',
-};
 
 const stylesHidden = `
   height: 100vh;
@@ -69,7 +66,7 @@ function App() {
   };
 
   return (
-    <div className="App" style={bodyStyles}>
+    <Body className="App">
       <ContainerWrapper isloading={loading}>
         {isError && <div>{errorMessage}</div>}
         {loading ? (
@@ -87,14 +84,14 @@ function App() {
             <QuizItems {...{ quizQuestions, ...props }}>
               <QuizChoices />
             </QuizItems>
-            {/* Submit Answers Button */}
-            <button
-              disabled={!data.length}
+            <Button
+              disabled={!data.length || showAnswers}
               onClick={() => setShowAnswers(true)}
+              hideButton={showAnswers}
             >
               Submit
-            </button>
-            {/* End Submit Answers Button */}
+            </Button>
+
             {/* Button To Clear & Try Again */}
             {showAnswers && (
               <button
@@ -165,7 +162,7 @@ function App() {
           </React.Fragment>
         )}
       </ContainerWrapper>
-    </div>
+    </Body>
   );
 }
 
