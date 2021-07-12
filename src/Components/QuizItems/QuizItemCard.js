@@ -51,6 +51,9 @@ const QuizCardSection = styled.section`
     border-color: ${({ theme }) => theme.primaryFontColor};
     border-style: solid;
     border-width: var(--border-height);
+    height: 40vh;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
 
     ::before {
       width: 100%;
