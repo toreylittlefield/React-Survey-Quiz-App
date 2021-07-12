@@ -1,4 +1,5 @@
 import React, { Children, cloneElement } from 'react';
+import QuizItemCard from './QuizItemCard';
 
 const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
   return (
@@ -9,14 +10,12 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
           cloneElement(element, { ...{ ...props, ...quizQuestion, quizIdx } })
         );
         return (
-          <section key={id + correctChoiceIndex} style={{ width: 300 }}>
-            <div>
-              <h2>{word}</h2>
-              {/* Quiz Questions */}
-              {childrenwithprops}
-              {/* End Quiz Questions */}
-            </div>
-          </section>
+          <QuizItemCard key={id + correctChoiceIndex}>
+            <h2>{word}</h2>
+            {/* Quiz Questions */}
+            {childrenwithprops}
+            {/* End Quiz Questions */}
+          </QuizItemCard>
         );
       })}
     </React.Fragment>
