@@ -56,7 +56,7 @@ function App() {
   return (
     <div className="App" style={bodyStyles}>
       <ContainerWrapper isloading={loading}>
-        {isError && <div>{errorMessage.toString()}</div>}
+        {isError && <div>{errorMessage}</div>}
         {loading ? (
           <Loading loading={loading}></Loading>
         ) : (
