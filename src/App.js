@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useFetch from './Api/useFetch';
-import { Loading, ProgressBar } from './Components/';
+import { Loading, ProgressBar, QuizTitle } from './Components/';
 
 const bodyStyles = {
   margin: 0,
@@ -58,23 +58,16 @@ function App() {
       <ContainerWrapper isloading={loading}>
         {isError && <div>{errorMessage.toString()}</div>}
         {loading ? (
-          <Loading />
+          <Loading loading={loading}></Loading>
         ) : (
           <React.Fragment>
-            {/* Vocab Quiz Title Section */}
-            <section>
-              <header>
-                <h2>Example Vocabulary Quiz</h2>
-              </header>
-
-              {/* Progress Bar */}
+            <QuizTitle title="Example Title Quiz">
               <ProgressBar
                 progress={progress.length}
                 quizQuestions={quizQuestions.length}
               />
-              {/* End Progress Bar */}
-            </section>
-            {/* End Vocab Quiz Title Section */}
+            </QuizTitle>
+
             {/* Quiz Item */}
             {quizQuestions.map((quizQuestion = {}, quizIdx) => {
               const { id, word, choices, correctChoiceIndex } = quizQuestion;
