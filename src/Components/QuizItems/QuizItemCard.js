@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const QuizCardSection = styled.section`
   --bg-color: ${({ theme }) => theme.secondaryBgColor};
+  --border-radius: 15px;
+  --border-height: 4px;
 
   position: relative;
   display: flex;
@@ -16,7 +18,7 @@ const QuizCardSection = styled.section`
   transition: all 0.35s ease;
   margin-bottom: 2em;
   opacity: 0.5;
-  border-radius: 15px;
+  border-radius: var(--border-radius);
 
   ::before,
   ::after {
@@ -25,9 +27,8 @@ const QuizCardSection = styled.section`
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--bg-color);
-    height: 4px;
-    border-radius: 15px;
+    height: var(--border-height);
+    border-radius: var(--border-radius);
   }
 
   ::before {
@@ -39,17 +40,17 @@ const QuizCardSection = styled.section`
 
   ::after {
     width: 100%;
-    background: white;
+    background: ${({ theme }) => theme.primaryFontColor};
     transition: width 0.5s ease;
   }
   :hover {
     width: 90vw;
     box-shadow: 0 10px 20px 0 rgba(#202024, 0.12);
     opacity: 1;
-    border-radius: 15px;
-    border-color: white;
+    border-radius: var(--border-radius);
+    border-color: ${({ theme }) => theme.primaryFontColor};
     border-style: solid;
-    border-width: 4px;
+    border-width: var(--border-height);
 
     ::before {
       width: 100%;
