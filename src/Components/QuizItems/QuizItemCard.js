@@ -117,27 +117,37 @@ const QuizItemCard = ({
   const [choice, setChoice] = useState(false);
   const [key, value] = choiceSelected;
   const [isActive, setActive] = useState(true);
+  const [isActiveElement, setIsActiveElement] = useState(true);
 
   const domNode = useClickOutside(() => handleOnTouchLeave(), isActive);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (!key) return;
+    if (!isActiveElement && e) {
+      e.preventDefault();
+      return setIsActiveElement(true);
+    }
+
+    if (value && choice) setIsActiveElement(true);
     if (value !== null) return setChoice(false);
   };
 
   const handleOnTouchLeave = () => {
     if (!key) return;
+    if (isActiveElement) setIsActiveElement(false);
     if (isActive && cardNumber === 0) return setActive(false);
   };
 
   const handleOnMouseLeave = () => {
     if (!key) return;
     if (isActive && cardNumber === 0) setActive(false);
+    if (isActiveElement) setIsActiveElement(false);
     if (value !== null && choice === false) setChoice(true);
   };
 
   const handleOnMouseEnter = () => {
     if (!key) return;
+    if (!isActiveElement) setIsActiveElement(true);
     if (value !== null && choice) setChoice(false);
   };
   return (
