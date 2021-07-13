@@ -1,7 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+
+const answeredStyles = css`
+  opacity: 0.25;
+  transform: scale(0.75);
+  margin-bottom: 0em;
+  transition: all ease-out 0.5s;
+`;
+
+const notYetAnsweredStyles = css`
+  opacity: 0.5;
+`;
 
 const QuizCardSection = styled.section`
+  --boxShadowLight: ${({ theme }) => theme.boxShadowLight};
   --bg-color: ${({ theme }) => theme.secondaryBgColor};
   --border-radius: 15px;
   --border-height: 4px;
@@ -14,11 +26,15 @@ const QuizCardSection = styled.section`
   max-width: 80%;
   padding: 2em 0;
   background: var(--bg-color);
-  box-shadow: 0 0 6px 0 rgba(#202024, 0.12);
+  box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
   margin-bottom: 2em;
-  opacity: 0.5;
+  ${({ choice }) => (choice === false ? notYetAnsweredStyles : answeredStyles)};
   border-radius: var(--border-radius);
+
+  section :last-child {
+    margin-bottom: 10em;
+  }
 
   ::before,
   ::after {
@@ -43,31 +59,36 @@ const QuizCardSection = styled.section`
     background: ${({ theme }) => theme.primaryFontColor};
     transition: width 0.5s ease;
   }
-  :hover {
-    width: 90vw;
-    box-shadow: 0 10px 20px 0 rgba(#202024, 0.12);
-    opacity: 1;
-    border-radius: var(--border-radius);
-    border-color: ${({ theme }) => theme.primaryFontColor};
-    border-style: solid;
-    border-width: var(--border-height);
-    height: 40vh;
-    font-size: 1.5rem;
-    line-height: 2.5rem;
+  ${({ choice }) =>
+    choice === false
+      ? css`
+          :hover {
+            width: 90vw;
+            box-shadow: 0px 10px 20px 0px var(--boxShadowLight);
+            opacity: 1;
+            border-radius: var(--border-radius);
+            border-color: ${({ theme }) => theme.primaryFontColor};
+            border-style: solid;
+            border-width: var(--border-height);
+            transform: scale(1);
+            font-size: 1.5rem;
+            line-height: 2.5rem;
 
-    ::before {
-      width: 100%;
-      opacity: 1;
-      transition: opacity 0.5s ease, width 0.5s ease;
-      transition-delay: 0;
-    }
+            ::before {
+              width: 100%;
+              opacity: 1;
+              transition: opacity 0.5s ease, width 0.5s ease;
+              transition-delay: 0;
+            }
 
-    ::after {
-      width: 0;
-      opacity: 0;
-      transition: width 0 ease;
-    }
-  }
+            ::after {
+              width: 0;
+              opacity: 0;
+              transition: width 0 ease;
+            }
+          }
+        `
+      : ''}
 `;
 
 const QuizCardContent = styled.div`
@@ -75,9 +96,34 @@ const QuizCardContent = styled.div`
   max-width: 80%;
 `;
 
-const QuizItemCard = ({ children = [] }) => {
+const QuizItemCard = ({ children = [], choiceSelected = [], ...props }) => {
+  const [choice, setChoice] = useState(false);
+  const [key, value] = choiceSelected;
+  const handleClick = () => {
+    if (!key) return;
+    if (value !== null && choice === false) return setChoice(true);
+    if (value !== null && choice) return setChoice(false);
+  };
+
+  const handleOnMouseLeave = () => {
+    if (!key) return;
+    if (value !== null && choice === false) return setChoice(true);
+  };
+
+  const handleOnMouseEnter = () => {
+    if (!key) return;
+    if (value !== null && choice) return setChoice(false);
+  };
   return (
-    <QuizCardSection>
+    <QuizCardSection
+      {...{
+        ...props,
+        choice,
+        onMouseLeave: handleOnMouseLeave,
+        onMouseEnter: handleOnMouseEnter,
+        onClick: handleClick,
+      }}
+    >
       <QuizCardContent>{children}</QuizCardContent>
     </QuizCardSection>
   );
