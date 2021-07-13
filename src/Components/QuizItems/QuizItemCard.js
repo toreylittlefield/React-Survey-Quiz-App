@@ -3,10 +3,12 @@ import styled, { css } from 'styled-components';
 import useClickOutside from '../../Hooks/useClickOutside';
 
 const answeredStyles = css`
-  opacity: 0.25;
+  opacity: 1;
+  filter: blur(0.1rem);
   transform: scale(0.75);
   margin-bottom: 0em;
   transition: all ease-out 0.5s;
+  background-color: purple;
 `;
 
 const notYetAnsweredStyles = css`
@@ -58,7 +60,8 @@ const QuizCardSection = styled.section`
   width: 50vw;
   max-width: 80%;
   padding: 2em 0;
-  background: var(--bg-color);
+  background: ${({ value, choice }) =>
+    value === null ? `var(--bg-color)` : `purple`};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
   margin-bottom: 2em;
@@ -155,6 +158,7 @@ const QuizItemCard = ({
       ref={domNode}
       {...{
         ...props,
+        value,
         choice,
         onMouseLeave: handleOnMouseLeave,
         onMouseEnter: handleOnMouseEnter,
