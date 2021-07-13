@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import useClickOutside from '../../Hooks/useClickOutside';
 
 const answeredStyles = css`
   opacity: 0.25;
@@ -117,13 +118,14 @@ const QuizItemCard = ({
   const [key, value] = choiceSelected;
   const [isActive, setActive] = useState(true);
 
-  const handleClick = (e) => {
+  const domNode = useClickOutside(() => handleOnTouchLeave(), isActive);
+
+  const handleClick = () => {
     if (!key) return;
     if (value !== null) return setChoice(false);
   };
 
-  const handleOnTouchLeave = (e) => {
-    console.log({ touch: e.target });
+  const handleOnTouchLeave = () => {
     if (!key) return;
     if (isActive && cardNumber === 0) {
       setActive(false);
@@ -144,6 +146,7 @@ const QuizItemCard = ({
   };
   return (
     <QuizCardSection
+      ref={domNode}
       {...{
         ...props,
         choice,
