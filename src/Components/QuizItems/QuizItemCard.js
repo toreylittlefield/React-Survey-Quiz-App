@@ -155,7 +155,6 @@ const QuizItemCard = ({
         onClick: handleClick,
         cardNumber,
         isActive,
-        onTouchStart: handleOnTouchLeave,
       }}
     >
       <QuizCardContent>{children}</QuizCardContent>
