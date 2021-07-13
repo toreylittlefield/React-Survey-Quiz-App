@@ -27,6 +27,7 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
             key={id + correctChoiceIndex}
             onClick={() => handleShow(quizIdx)}
             choiceSelected={Object.entries(choicesSelected[quizIdx]).flat(2)}
+            cardNumber={quizIdx}
           >
             <h2 ref={itemsRef[quizIdx]}>{word}</h2>
             {/* Quiz Questions */}

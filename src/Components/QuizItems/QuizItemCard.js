@@ -12,6 +12,38 @@ const notYetAnsweredStyles = css`
   opacity: 0.5;
 `;
 
+const hoverDefault = css`
+  width: 90vw;
+  box-shadow: 0px 10px 20px 0px var(--boxShadowLight);
+  opacity: 1;
+  border-radius: var(--border-radius);
+  border-color: ${({ theme }) => theme.primaryFontColor};
+  border-style: solid;
+  border-width: var(--border-height);
+  transform: scale(1);
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+`;
+
+const hoverCSS = css`
+  :hover {
+    ${hoverDefault}
+
+    ::before {
+      width: 100%;
+      opacity: 1;
+      transition: opacity 0.5s ease, width 0.5s ease;
+      transition-delay: 0;
+    }
+
+    ::after {
+      width: 0;
+      opacity: 0;
+      transition: width 0 ease;
+    }
+  }
+`;
+
 const QuizCardSection = styled.section`
   --boxShadowLight: ${({ theme }) => theme.boxShadowLight};
   --bg-color: ${({ theme }) => theme.secondaryBgColor};
@@ -59,36 +91,15 @@ const QuizCardSection = styled.section`
     background: ${({ theme }) => theme.primaryFontColor};
     transition: width 0.5s ease;
   }
-  ${({ choice }) =>
-    choice === false
-      ? css`
-          :hover {
-            width: 90vw;
-            box-shadow: 0px 10px 20px 0px var(--boxShadowLight);
-            opacity: 1;
-            border-radius: var(--border-radius);
-            border-color: ${({ theme }) => theme.primaryFontColor};
-            border-style: solid;
-            border-width: var(--border-height);
-            transform: scale(1);
-            font-size: 1.5rem;
-            line-height: 2.5rem;
 
-            ::before {
-              width: 100%;
-              opacity: 1;
-              transition: opacity 0.5s ease, width 0.5s ease;
-              transition-delay: 0;
-            }
-
-            ::after {
-              width: 0;
-              opacity: 0;
-              transition: width 0 ease;
-            }
-          }
-        `
-      : ''}
+  ${({ choice, cardNumber, isActive }) => {
+    if (choice === false && cardNumber === 0 && isActive) {
+      return hoverDefault;
+    }
+    if (choice === false) {
+      return hoverCSS;
+    }
+  }}
 `;
 
 const QuizCardContent = styled.div`
@@ -96,9 +107,15 @@ const QuizCardContent = styled.div`
   max-width: 80%;
 `;
 
-const QuizItemCard = ({ children = [], choiceSelected = [], ...props }) => {
+const QuizItemCard = ({
+  children = [],
+  choiceSelected = [],
+  cardNumber = -1,
+  ...props
+}) => {
   const [choice, setChoice] = useState(false);
   const [key, value] = choiceSelected;
+  const [isActive, setActive] = useState(true);
   const handleClick = () => {
     if (!key) return;
     if (value !== null && choice === false) return setChoice(true);
@@ -107,6 +124,9 @@ const QuizItemCard = ({ children = [], choiceSelected = [], ...props }) => {
 
   const handleOnMouseLeave = () => {
     if (!key) return;
+    if (isActive && cardNumber === 0) {
+      setActive(false);
+    }
     if (value !== null && choice === false) return setChoice(true);
   };
 
@@ -122,6 +142,8 @@ const QuizItemCard = ({ children = [], choiceSelected = [], ...props }) => {
         onMouseLeave: handleOnMouseLeave,
         onMouseEnter: handleOnMouseEnter,
         onClick: handleClick,
+        cardNumber,
+        isActive,
       }}
     >
       <QuizCardContent>{children}</QuizCardContent>
