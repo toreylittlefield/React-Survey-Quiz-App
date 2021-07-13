@@ -116,10 +116,18 @@ const QuizItemCard = ({
   const [choice, setChoice] = useState(false);
   const [key, value] = choiceSelected;
   const [isActive, setActive] = useState(true);
-  const handleClick = () => {
+
+  const handleClick = (e) => {
     if (!key) return;
-    if (value !== null && choice === false) return setChoice(true);
-    if (value !== null && choice) return setChoice(false);
+    if (value !== null) return setChoice(false);
+  };
+
+  const handleOnTouchLeave = (e) => {
+    console.log({ touch: e.target });
+    if (!key) return;
+    if (isActive && cardNumber === 0) {
+      setActive(false);
+    }
   };
 
   const handleOnMouseLeave = () => {
@@ -144,6 +152,7 @@ const QuizItemCard = ({
         onClick: handleClick,
         cardNumber,
         isActive,
+        onTouchStart: handleOnTouchLeave,
       }}
     >
       <QuizCardContent>{children}</QuizCardContent>
