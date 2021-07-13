@@ -122,19 +122,17 @@ const QuizItemCard = ({
 
   const handleClick = (event) => {
     if (!key) return;
-    if (!isActive && choice) {
+    if (!isActive) {
       event.preventDefault();
       return setActive(true);
     }
-    if (value !== null) {
-      setChoice(false);
-      setActive(false);
-    }
+    if (value !== null) return setChoice(false);
   };
 
   const handleOnTouchLeave = () => {
     if (!key) return;
     if (isActive && cardNumber === 0) return setActive(false);
+    if (!isActive) return setActive(true);
   };
 
   const handleOnMouseLeave = () => {
@@ -142,9 +140,9 @@ const QuizItemCard = ({
     if (isActive && cardNumber === 0) {
       setActive(false);
     }
+    if (isActive) setActive(false);
     if (value !== null && choice === false) {
       setChoice(true);
-      setActive(false);
     }
   };
 
