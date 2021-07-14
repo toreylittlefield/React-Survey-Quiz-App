@@ -76,7 +76,8 @@ const hoverCSS = css`
 
 const QuizCardSection = styled.section`
   --boxShadowLight: ${({ theme }) => theme.boxShadowLight};
-  --bg-color: ${({ theme }) => theme.secondaryBgColor};
+  --bg-color: ${({ theme }) => theme.primaryBgColor};
+  --alt-bg-color: ${({ theme }) => theme.secondaryBgColor};
   --border-radius: 15px;
   --border-height: 4px;
 
@@ -87,7 +88,8 @@ const QuizCardSection = styled.section`
   width: 50vw;
   max-width: 80%;
   padding: 2em 0;
-  background: ${({ value }) => (value === null ? `var(--bg-color)` : `purple`)};
+  background: ${({ value }) =>
+    value === null ? `var(--bg-color)` : `var(--alt-bg-color)`};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
   margin-bottom: 2em;
