@@ -1,14 +1,42 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import useClickOutside from '../../Hooks/useClickOutside';
 
+const selectedChoiceTransition = css`
+  transform: ${({ cardNumber }) =>
+    cardNumber % 2 === 1 ? `scale(0.1)` : `scale(0.1)`};
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+  /* transition: a 600ms linear; */
+  transition-timing-function: linear;
+  transition-property: transform, opacity, visibility, font-size, padding,
+    margin;
+  transition-duration: 600ms, 500ms, 500ms, 500ms, 500ms, 500ms;
+`;
+
+const correctChoiceSelected = css`
+  background-color: green;
+`;
+
+const notCorrectChoiceSelected = css`
+  background-color: red;
+`;
+
 const answeredStyles = css`
   opacity: 1;
-  filter: blur(0.1rem);
-  transform: scale(0.75);
-  margin-bottom: 0em;
+  transform: scale(1);
   transition: all ease-out 0.5s;
-  background-color: purple;
+  ${({ showAnswers }) => (showAnswers ? '' : selectedChoiceTransition)}
+  ${({ value, correctChoiceIndex }) => {
+    if (value === correctChoiceIndex) {
+      return correctChoiceSelected;
+    }
+    return notCorrectChoiceSelected;
+  }}
 `;
 
 const notYetAnsweredStyles = css`
@@ -60,8 +88,7 @@ const QuizCardSection = styled.section`
   width: 50vw;
   max-width: 80%;
   padding: 2em 0;
-  background: ${({ value, choice }) =>
-    value === null ? `var(--bg-color)` : `purple`};
+  background: ${({ value }) => (value === null ? `var(--bg-color)` : `purple`)};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
   margin-bottom: 2em;
@@ -96,7 +123,8 @@ const QuizCardSection = styled.section`
     transition: width 0.5s ease;
   }
 
-  ${({ choice, cardNumber, isActive }) => {
+  ${({ choice, cardNumber, isActive, showAnswers }) => {
+    if (showAnswers) return answeredStyles;
     if (choice === false && cardNumber === 0 && isActive) {
       return hoverDefault;
     }
@@ -111,45 +139,61 @@ const QuizCardContent = styled.div`
   max-width: 80%;
 `;
 
+const defaultState = {
+  choice: false,
+  isActive: true,
+  isActiveElement: true,
+};
+
 const QuizItemCard = ({
   children = [],
   choiceSelected = [],
+  correctChoiceIndex = -1,
   cardNumber = -1,
+  showAnswers = false,
   ...props
 }) => {
-  const [choice, setChoice] = useState(false);
+  const [choice, setChoice] = useState(defaultState.choice);
+  const [isActive, setActive] = useState(defaultState.isActive);
+  const [isActiveElement, setIsActiveElement] = useState(
+    defaultState.isActiveElement
+  );
   const [key, value] = choiceSelected;
-  const [isActive, setActive] = useState(true);
-  const [isActiveElement, setIsActiveElement] = useState(true);
+
+  useEffect(() => {
+    if (!showAnswers) return;
+    setChoice(defaultState.choice);
+    setActive(defaultState.isActive);
+    setIsActiveElement(defaultState.isActiveElement);
+  }, [showAnswers]);
 
   const domNode = useClickOutside(() => handleOnTouchLeave(), isActive);
 
   const handleClick = (e) => {
-    if (!key) return;
+    if (!key || showAnswers) return;
     if (!isActiveElement && e) {
       e.preventDefault();
       return setIsActiveElement(true);
     }
-
     if (value && choice) setIsActiveElement(true);
     if (value !== null) return setChoice(false);
   };
 
   const handleOnTouchLeave = () => {
-    if (!key) return;
+    if (!key || showAnswers) return;
     if (isActiveElement) setIsActiveElement(false);
     if (isActive && cardNumber === 0) return setActive(false);
   };
 
   const handleOnMouseLeave = () => {
-    if (!key) return;
+    if (!key || showAnswers) return;
     if (isActive && cardNumber === 0) setActive(false);
     if (isActiveElement) setIsActiveElement(false);
     if (value !== null && choice === false) setChoice(true);
   };
 
   const handleOnMouseEnter = () => {
-    if (!key) return;
+    if (!key || showAnswers) return;
     if (!isActiveElement) setIsActiveElement(true);
     if (value !== null && choice) setChoice(false);
   };
@@ -158,7 +202,9 @@ const QuizItemCard = ({
       ref={domNode}
       {...{
         ...props,
+        showAnswers,
         value,
+        correctChoiceIndex,
         choice,
         onMouseLeave: handleOnMouseLeave,
         onMouseEnter: handleOnMouseEnter,

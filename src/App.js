@@ -97,18 +97,16 @@ function App() {
               <button
                 onClick={() => {
                   setShowAnswers(false);
+                  setProgress([]);
+                  setchoicesSelected(
+                    choicesSelected.map((quiz) => {
+                      const [key] = Object.entries(quiz).flat(2);
+                      return (quiz[key] = { [key]: null });
+                    })
+                  );
                   setNumberCorrectAnswers(
                     Array.from(numCorrectAnswers).fill(0)
                   );
-                  setchoicesSelected(
-                    choicesSelected.map((quiz) => {
-                      const quizId = Object.keys(quiz).toString();
-                      return {
-                        [`${quizId}`]: null,
-                      };
-                    })
-                  );
-                  setProgress([]);
                 }}
               >
                 Try Again

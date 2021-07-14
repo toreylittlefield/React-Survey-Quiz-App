@@ -11,7 +11,7 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
     //   behavior: 'smooth',
     // });
   };
-  const { choicesSelected = [{}] } = props;
+  const { choicesSelected = [{ key: '' }], showAnswers = false } = props;
   return (
     <React.Fragment>
       {quizQuestions.map((quizQuestion = {}, quizIdx) => {
@@ -21,13 +21,14 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
             ...{ ...props, ...quizQuestion, ...choicesSelected, quizIdx },
           })
         );
-
         return (
           <QuizItemCard
             key={id + correctChoiceIndex}
             onClick={() => handleShow(quizIdx)}
             choiceSelected={Object.entries(choicesSelected[quizIdx]).flat(2)}
             cardNumber={quizIdx}
+            correctChoiceIndex={correctChoiceIndex}
+            showAnswers={showAnswers}
           >
             <h2 ref={itemsRef[quizIdx]}>{word}</h2>
             {/* Quiz Questions */}
