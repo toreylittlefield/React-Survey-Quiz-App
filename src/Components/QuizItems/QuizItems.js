@@ -7,9 +7,9 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
     useRef()
   );
   const handleShow = (i) => {
-    // itemsRef[i + 1].current.scrollIntoView({
-    //   behavior: 'smooth',
-    // });
+    itemsRef[i + 1].current.scrollIntoView({
+      behavior: 'smooth',
+    });
   };
   const { choicesSelected = [{ key: '' }], showAnswers = false } = props;
   return (
@@ -23,6 +23,7 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
         );
         return (
           <QuizItemCard
+            ref={itemsRef[quizIdx]}
             key={id + correctChoiceIndex}
             onClick={() => handleShow(quizIdx)}
             choiceSelected={Object.entries(choicesSelected[quizIdx]).flat(2)}
@@ -37,10 +38,10 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
           </QuizItemCard>
         );
       })}
-      {/* <div
+      <div
         style={{ visibility: 'hidden' }}
         ref={itemsRef[itemsRef.length - 1]}
-      ></div> */}
+      ></div>
     </React.Fragment>
   );
 };
