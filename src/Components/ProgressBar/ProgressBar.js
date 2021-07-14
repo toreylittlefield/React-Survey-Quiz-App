@@ -53,8 +53,10 @@ const ProgressBar = ({
     <section className="progress-bar">
       <h3>{`Score:`}</h3>
       <Container>
-        {lines.map((line) => (
-          <Label lineColor={line.lineColor}>{line.character}</Label>
+        {lines.map((line, lineIdx) => (
+          <Label key={lineIdx + line.lineColor} lineColor={line.lineColor}>
+            {line.character}
+          </Label>
         ))}
       </Container>
     </section>
