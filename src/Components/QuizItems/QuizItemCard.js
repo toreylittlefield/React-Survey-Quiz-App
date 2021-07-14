@@ -18,11 +18,11 @@ const selectedChoiceTransition = css`
 `;
 
 const correctChoiceSelected = css`
-  background-color: green;
+  color: ${({ theme }) => theme.successColor[1]};
 `;
 
 const notCorrectChoiceSelected = css`
-  background-color: red;
+  color: ${({ theme }) => theme.primaryFontColor};
 `;
 
 const answeredStyles = css`
@@ -88,8 +88,14 @@ const QuizCardSection = styled.section`
   width: 50vw;
   max-width: 80%;
   padding: 2em 0;
-  background: ${({ value }) =>
-    value === null ? `var(--bg-color)` : `var(--alt-bg-color)`};
+  background: ${({ theme, value, correctChoiceIndex, showAnswers }) => {
+    if (!showAnswers) {
+      if (value === null) return `var(--bg-color)`;
+      return `var(--alt-bg-color)`;
+    }
+    if (correctChoiceIndex === value) return `var(--bg-color)`;
+    return theme.rejectColor[0];
+  }};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
   margin-bottom: 2em;
@@ -120,7 +126,13 @@ const QuizCardSection = styled.section`
 
   ::after {
     width: 100%;
-    background: ${({ theme }) => theme.primaryFontColor};
+    background: ${({ theme, value, correctChoiceIndex, showAnswers }) => {
+      if (showAnswers) {
+        if (value === correctChoiceIndex) return theme.successColor[0];
+        return theme.primaryFontColor;
+      }
+      return theme.primaryFontColor;
+    }};
     transition: width 0.5s ease;
   }
 

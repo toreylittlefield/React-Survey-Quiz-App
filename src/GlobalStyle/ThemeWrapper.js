@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
+//'#45C9AA',
 const theme = {
   primaryFontColor: '#DBDDE5',
   secondaryFontColor: '#7B7B7B',
@@ -13,8 +14,8 @@ const theme = {
   alternateButtonColor: { h: '0', s: '0%', l: '87%' },
   whiteButtonColor: { h: '0', s: '0%', l: '100%' },
   outlineColor: '#0D856E',
-  successColor: '#45C9AA',
-  rejectColor: '#C50E49',
+  successColor: ['#0FC599', '#45C9AA'],
+  rejectColor: ['rgba(197, 14, 73, 0.7)', '#C50E49', '#E30425'],
 };
 
 const ThemeWrapper = ({ children }) => (
