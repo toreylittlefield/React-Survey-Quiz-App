@@ -11,7 +11,7 @@ const PrimaryButton = styled.button`
   --color-primary: hsl(var(--color), var(--l));
   --color-primary-darker: hsl(var(--color), calc(var(--l) - 5%));
   --color-primary-darkest: hsl(var(--color), calc(var(--l) - 10%));
-  font-size: 1rem;
+  font-size: 2rem;
   display: inline-block;
   cursor: pointer;
   text-decoration: none;
