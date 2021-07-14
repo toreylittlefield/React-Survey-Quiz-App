@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 
-const PrimaryButton = styled.button`
+const CustomButton = styled.button`
   /* --clr-color: #b64965;
   --clr-bg: #c56d84; */
   // #363A66 //235° , 31% , 31%
@@ -15,12 +15,12 @@ const PrimaryButton = styled.button`
   display: inline-block;
   cursor: pointer;
   text-decoration: none;
-  /* color: var(--clr-color);
-  border: var(--clr-color) 0.125em solid; */
+  margin: 2rem 0 2rem 0;
   padding: 0.25em 1em;
   border-radius: 0.25em;
   position: relative;
-  background: var(--color-primary);
+  background: ${({ buttonColor }) =>
+    buttonColor ? buttonColor : `var(--color-primary);`};
   color: #fff;
   cursor: pointer;
   :hover,
@@ -34,7 +34,7 @@ const PrimaryButton = styled.button`
 
 const Button = ({ hideButton = false, children = [], ...props }) => {
   if (hideButton) return null;
-  return <PrimaryButton {...props}>{children} </PrimaryButton>;
+  return <CustomButton {...props}>{children} </CustomButton>;
 };
 
 export default Button;

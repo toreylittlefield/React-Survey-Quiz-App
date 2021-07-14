@@ -181,7 +181,6 @@ const QuizItemCard = ({
   const handleOnTouchLeave = () => {
     if (!key || showAnswers) return;
     if (isActiveElement) setIsActiveElement(false);
-    if (!isActiveElement) setIsActiveElement(true);
     if (isActive && cardNumber === 0) return setActive(false);
   };
 
@@ -197,6 +196,10 @@ const QuizItemCard = ({
     if (!isActiveElement) setIsActiveElement(true);
     if (value !== null && choice) setChoice(false);
   };
+
+  const onTouchMove = (e) => {
+    console.log(e);
+  };
   return (
     <QuizCardSection
       ref={domNode}
@@ -211,6 +214,7 @@ const QuizItemCard = ({
         onClick: handleClick,
         cardNumber,
         isActive,
+        onTouchMove,
       }}
     >
       <QuizCardContent>{children}</QuizCardContent>

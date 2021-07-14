@@ -94,7 +94,7 @@ function App() {
 
             {/* Button To Clear & Try Again */}
             {showAnswers && (
-              <button
+              <Button
                 onClick={() => {
                   setShowAnswers(false);
                   setProgress([]);
@@ -108,9 +108,10 @@ function App() {
                     Array.from(numCorrectAnswers).fill(0)
                   );
                 }}
+                buttonColor="orange"
               >
                 Try Again
-              </button>
+              </Button>
             )}
             {/* End Quiz Item */}
             {/* Show Answers & Display User Answers */}
