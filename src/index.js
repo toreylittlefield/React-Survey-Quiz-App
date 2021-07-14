@@ -6,8 +6,8 @@ import ThemeWrapper from './GlobalStyle/ThemeWrapper';
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle />
     <ThemeWrapper>
-      <GlobalStyle />
       <App />
     </ThemeWrapper>
   </React.StrictMode>,
