@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useFetch from './Api/useFetch';
+
 import {
   Body,
   Loading,
@@ -34,7 +35,7 @@ function App() {
     const wrapper = async () => {
       setQuizQuestions(data);
       setchoicesSelected(data.map((quiz) => ({ [`quizid${quiz.id}`]: null })));
-      setNumberCorrectAnswers(Array.from(data).fill(0));
+      setNumberCorrectAnswers(Array.from(data).fill(-1));
       setCorrectAnswers(
         data.map((quiz) => {
           return {
@@ -54,7 +55,12 @@ function App() {
   const [progress, setProgress] = useState([]);
 
   const handleCalcScore = () =>
-    numCorrectAnswers.reduce((acc, val) => acc + val, 0);
+    numCorrectAnswers.reduce((acc, val) => {
+      if (val === -1) {
+        return acc;
+      }
+      return acc + val;
+    }, 0);
 
   const props = {
     showAnswers,
@@ -77,6 +83,7 @@ function App() {
               <ProgressBar
                 progress={progress.length}
                 quizQuestions={quizQuestions.length}
+                numCorrectAnswers={numCorrectAnswers}
               />
             </QuizTitle>
 
@@ -95,6 +102,7 @@ function App() {
             {/* Button To Clear & Try Again */}
             {showAnswers && (
               <Button
+                color="white"
                 onClick={() => {
                   setShowAnswers(false);
                   setProgress([]);
@@ -105,10 +113,9 @@ function App() {
                     })
                   );
                   setNumberCorrectAnswers(
-                    Array.from(numCorrectAnswers).fill(0)
+                    Array.from(numCorrectAnswers).fill(-1)
                   );
                 }}
-                buttonColor="orange"
               >
                 Try Again
               </Button>
