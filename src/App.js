@@ -17,7 +17,6 @@ const stylesHidden = `
 `;
 
 const ContainerWrapper = styled.div`
-  font-family: 'Ubuntu', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import TitilliumWeb from '../Assets/Fonts/Titillium_Web/TitilliumWeb-ExtraLightItalic.ttf';
+import TitilliumWebItalic from '../Assets/Fonts/Titillium_Web/TitilliumWeb-ExtraLightItalic.ttf';
+import TitilliumWebRegular from '../Assets/Fonts/Titillium_Web/TitilliumWeb-Regular.ttf';
+import IBMPlexSerif from '../Assets/Fonts/IBM_Plex_Serif/IBMPlexSerif-ExtraLight.ttf';
 import normalize from './normalizecss';
 
 const GlobalStyle = createGlobalStyle`
@@ -13,12 +15,30 @@ ${normalize}
 };
 
 @font-face {
-    font-family: 'Titillium Web';
-    src: url(${TitilliumWeb}) format('truetype');
+    font-family: 'Titillium-Web-Italic';
+    src: url(${TitilliumWebItalic}) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Titillium-Web-Regular';
+    src: url(${TitilliumWebRegular}) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'IBMPlexSerif';
+    src: url(${IBMPlexSerif}) format('truetype');
   }
 
   :root {
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Titillium-Web-Regular';
+  }
+
+  .quiz-title * {
+    font-family: 'IBMPlexSerif';
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: 'Titillium-Web-Italic';
   }
 
 

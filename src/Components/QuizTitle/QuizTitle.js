@@ -2,7 +2,7 @@ import React from 'react';
 
 const QuizTitle = ({ title = '', children = [] }) => {
   return (
-    <section>
+    <section className="quiz-title">
       <header>
         <h2>{title}</h2>
       </header>

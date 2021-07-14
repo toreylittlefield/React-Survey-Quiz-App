@@ -51,7 +51,7 @@ const QuizChoices = ({
                 );
               }}
             />
-            {choice.text}
+            <span>{choice.text}</span>
           </label>
         </div>
       ))}
