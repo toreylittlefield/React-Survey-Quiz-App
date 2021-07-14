@@ -11,7 +11,6 @@ const selectedChoiceTransition = css`
   font-size: 0;
   padding: 0;
   margin: 0;
-  /* transition: a 600ms linear; */
   transition-timing-function: linear;
   transition-property: transform, opacity, visibility, font-size, padding,
     margin;
@@ -182,6 +181,7 @@ const QuizItemCard = ({
   const handleOnTouchLeave = () => {
     if (!key || showAnswers) return;
     if (isActiveElement) setIsActiveElement(false);
+    if (!isActiveElement) setIsActiveElement(true);
     if (isActive && cardNumber === 0) return setActive(false);
   };
 
