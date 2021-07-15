@@ -78,6 +78,9 @@ function App() {
           <Loading loading={loading}></Loading>
         ) : (
           <React.Fragment>
+            <nav
+              style={{ backgroundColor: 'black', height: 80, width: '100%' }}
+            ></nav>
             <QuizTitle title="Quiz Title">
               <ProgressBar
                 showAnswers={showAnswers}
