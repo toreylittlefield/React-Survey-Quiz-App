@@ -6,14 +6,20 @@ const QuizTitleSection = styled.section`
   display: flex;
   flex-direction: column;
   padding: 2em;
+  align-items: flex-start;
+  width: 50vw;
+  max-width: 80%;
+`;
+
+const QuizTitleH1 = styled.h1`
+  opacity: 0.8;
+  letter-spacing: 0.4em;
 `;
 
 const QuizTitle = ({ title = '', children = [] }) => {
   return (
     <QuizTitleSection className="quiz-title">
-      <header>
-        <h1>{title}</h1>
-      </header>
+      <QuizTitleH1>{title}</QuizTitleH1>
       {children}
     </QuizTitleSection>
   );
