@@ -29,7 +29,7 @@ const answeredStyles = css`
   opacity: 1;
   transform: scale(1);
   transition: all ease-out 0.5s;
-  ${({ showAnswers }) => (showAnswers ? '' : selectedChoiceTransition)}
+  ${({ isVisible }) => (isVisible ? '' : selectedChoiceTransition)}
   ${({ value, correctChoiceIndex }) => {
     if (value === correctChoiceIndex) {
       return correctChoiceSelected;
@@ -99,7 +99,8 @@ const QuizCardSection = styled.section`
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
   margin-bottom: 2em;
-  ${({ choice }) => (choice === false ? notYetAnsweredStyles : answeredStyles)};
+  ${({ answered }) =>
+    answered === false ? notYetAnsweredStyles : answeredStyles};
   border-radius: var(--border-radius);
 
   section :last-child {
@@ -136,12 +137,12 @@ const QuizCardSection = styled.section`
     transition: width 0.5s ease;
   }
 
-  ${({ choice, cardNumber, isActive, showAnswers }) => {
+  ${({ answered, cardNumber, isActive, showAnswers }) => {
     if (showAnswers) return answeredStyles;
-    if (choice === false && cardNumber === 0 && isActive) {
+    if (answered === false && cardNumber === 0 && isActive) {
       return hoverDefault;
     }
-    if (choice === false) {
+    if (answered === false) {
       return hoverCSS;
     }
   }}
@@ -153,9 +154,10 @@ const QuizCardContent = styled.div`
 `;
 
 const defaultState = {
-  choice: false,
+  answered: false,
   isActive: true,
   isActiveElement: true,
+  isVisible: true,
 };
 
 const QuizItemCard = ({
@@ -166,19 +168,33 @@ const QuizItemCard = ({
   showAnswers = false,
   ...props
 }) => {
-  const [choice, setChoice] = useState(defaultState.choice);
+  const [answered, setAnswered] = useState(defaultState.answered);
   const [isActive, setActive] = useState(defaultState.isActive);
   const [isActiveElement, setIsActiveElement] = useState(
     defaultState.isActiveElement
   );
+  const [isVisible, SetisVisible] = useState(defaultState.isVisible);
   const [key, value] = choiceSelected;
 
   useEffect(() => {
+    // console.log({ isActiveElement, answered, value, isVisible });
+
+    if (answered && value !== null) {
+      SetisVisible(false);
+    }
+  }, [answered, value]);
+
+  useEffect(() => {
     if (!showAnswers) return;
-    setChoice(defaultState.choice);
-    setActive(defaultState.isActive);
-    setIsActiveElement(defaultState.isActiveElement);
-  }, [showAnswers]);
+    const timer = setTimeout(
+      setAnswered(defaultState.answered),
+      setActive(defaultState.isActive),
+      setIsActiveElement(defaultState.isActiveElement),
+      SetisVisible(defaultState.isVisible),
+      3000
+    );
+    return () => clearTimeout(timer);
+  }, [showAnswers, isVisible]);
 
   const domNode = useClickOutside(() => handleOnTouchLeave(), isActive);
 
@@ -188,8 +204,8 @@ const QuizItemCard = ({
       e.preventDefault();
       return setIsActiveElement(true);
     }
-    if (value && choice) setIsActiveElement(true);
-    if (value !== null) return setChoice(false);
+    if (value && answered) setIsActiveElement(true);
+    if (value !== null) return setAnswered(false);
   };
 
   const handleOnTouchLeave = () => {
@@ -202,18 +218,15 @@ const QuizItemCard = ({
     if (!key || showAnswers) return;
     if (isActive && cardNumber === 0) setActive(false);
     if (isActiveElement) setIsActiveElement(false);
-    if (value !== null && choice === false) setChoice(true);
+    if (value !== null && answered === false) setAnswered(true);
   };
 
   const handleOnMouseEnter = () => {
     if (!key || showAnswers) return;
     if (!isActiveElement) setIsActiveElement(true);
-    if (value !== null && choice) setChoice(false);
+    if (value !== null && answered) setAnswered(false);
   };
 
-  const onTouchMove = (e) => {
-    console.log(e);
-  };
   return (
     <QuizCardSection
       ref={domNode}
@@ -222,13 +235,13 @@ const QuizItemCard = ({
         showAnswers,
         value,
         correctChoiceIndex,
-        choice,
+        answered,
         onMouseLeave: handleOnMouseLeave,
         onMouseEnter: handleOnMouseEnter,
         onClick: handleClick,
         cardNumber,
         isActive,
-        onTouchMove,
+        isVisible,
       }}
     >
       <QuizCardContent>{children}</QuizCardContent>
