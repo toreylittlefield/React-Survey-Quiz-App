@@ -65,9 +65,13 @@ const fishKeyFrameGenerator = () => {
   }`;
   let lastKey = 0;
   let lastIndex = 0;
+  let opacity = 1;
   return percentages.map((key, index) => {
     if (index === 0) {
       return keyFrame(key, key, -2, 0, 0, 0, 1);
+    }
+    if (index >= 10) {
+      opacity = 0;
     }
     if (index === percentages.length - 1) {
       key = 100;
@@ -87,7 +91,8 @@ const fishKeyFrameGenerator = () => {
         70,
         randomNumber(1, 360),
         randomNumber(0.5, 0.3),
-        randomNumber(0.5, 0.3)
+        randomNumber(0.5, 0.3),
+        opacity
       );
     }
     if (lastIndex === 1) {
@@ -98,11 +103,12 @@ const fishKeyFrameGenerator = () => {
         randomNumber(1, 350),
         -90,
         2,
-        2
+        2,
+        opacity
       );
     }
     lastIndex = 0;
-    return keyFrame(key, key, -350, -90, 2, 2);
+    return keyFrame(key, key, -350, -90, 2, 2, opacity);
   });
 };
 
@@ -110,7 +116,7 @@ const frames = fishKeyFrameGenerator();
 console.log({ frames });
 
 const fishKeyFrames = keyframes`
-${frames}
+${fishKeyFrameGenerator()}
 /* 0% {
   transform: translate(-2vw, 0%) rotate(0deg) scale(2, 2);
 }
