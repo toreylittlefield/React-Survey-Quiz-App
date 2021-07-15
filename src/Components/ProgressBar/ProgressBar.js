@@ -99,7 +99,7 @@ const fishKeyFrames = keyframes`
 const timing = () => randomNumber(2200, 1800, 1, 'ms');
 
 const styleFish = css`
-  animation: ${() => fishKeyFrames} ${timing} linear 0ms infinite;
+  animation: ${() => fishKeyFrames} ${timing} linear 1800ms infinite;
 `;
 
 const FishIcon = styled(GiFishbone)`
@@ -145,7 +145,7 @@ const boneKeyFrames = keyframes`
 `;
 
 const styleBone = css`
-  animation: ${() => boneKeyFrames} ${timing} linear 0ms infinite;
+  animation: ${() => boneKeyFrames} ${timing} linear 1500ms infinite;
 `;
 
 const BoneIcon = styled(FaBone)`
@@ -227,8 +227,14 @@ const ProgressBar = ({
   const showProgress = `Progress: ${completed}`;
   const showScore = `Total Score: ${totalScore} / ${quizQuestions}`;
 
+  const ProgressBarContainer = styled.div`
+    @media (max-width: 480px) {
+      align-self: center;
+    }
+  `;
+
   return (
-    <section className="progress-bar">
+    <ProgressBarContainer className="progress-bar">
       <h3>{showAnswers ? showScore : showProgress}</h3>
       <Container>
         {lines.map((line, lineIdx) => (
@@ -237,7 +243,7 @@ const ProgressBar = ({
           </Label>
         ))}
       </Container>
-    </section>
+    </ProgressBarContainer>
   );
 };
 
