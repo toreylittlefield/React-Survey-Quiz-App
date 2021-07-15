@@ -51,22 +51,22 @@ const scale = () => randomNumber(0.5, 0.5);
 const fishKeyFrames = keyframes`
     0% { transform: translate(0%, 0%) rotate(-70deg) scale(1, 1); }
     33% { 
-      transform: translate(1250%, ${height()}) rotate(-60deg) scale(${
+      transform: translate(1050%, ${height()}) rotate(-60deg) scale(${
   scale() + 0.55
 }, ${scale() - 0.45}); 
     }
     48% {
-      transform: translate(1500%, ${height()}) rotate(-30deg) scale(${
+      transform: translate(1200%, ${height()}) rotate(-30deg) scale(${
   scale() - 0.05
 }, ${scale() + 0.4});
     }
     66% { 
-      transform: translate(2000%, 50%) rotate(10deg) scale(1, 1);
+      transform: translate(1400%, 50%) rotate(10deg) scale(1, 1);
       opacity: 1;
       border-bottom: none;
     }
     67% {
-      transform: translate(2000%, 50%) rotate(-20deg) scale(1, 1);
+      transform: translate(1500%, 50%) rotate(-20deg) scale(1, 1);
       opacity: 0; 
     }
     70% { 
@@ -85,6 +85,7 @@ const styleFish = css`
 `;
 
 const FishIcon = styled(GiFishbone)`
+  z-index: 0;
   ${styleFish};
   color: ${({ theme }) => theme.rejectColor[2]};
 `;
@@ -135,6 +136,7 @@ const BoneIcon = styled(FaBone)`
   padding: 0.2em;
   border: 1px solid ${({ theme }) => theme.boxShadowLight};
   border-radius: 30%;
+  z-index: 0;
 `;
 
 const ProgressBar = ({
