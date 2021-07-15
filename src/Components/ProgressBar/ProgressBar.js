@@ -51,38 +51,38 @@ const scale = () => randomNumber(0.5, 0.5);
 const fishKeyFrames = keyframes`
     0% { transform: translate(0%, 0%) rotate(-70deg) scale(3, 3.5); }
     5% { 
-      transform: translate(200%, -100%) rotate(-30deg) scale(2.5, 3); 
+      transform: translate(10vw, -5vw) rotate(-30deg) scale(2.5, 3); 
     }
     8% { 
-      transform: translate(300%, -50%) rotate(-40deg) scale(2.2, 2.5); 
+      transform: translate(11vw, -50%) rotate(-40deg) scale(2.2, 2.5); 
     }
     11% { 
-      transform: translate(400%, -100%) rotate(-35deg) scale(2.5, 3); 
+      transform: translate(12vw, -100%) rotate(-35deg) scale(2.5, 3); 
     }
     14% { 
-      transform: translate(500%, -50%) rotate(-40deg) scale(2.2, 2); 
+      transform: translate(13vw, -50%) rotate(-40deg) scale(2.2, 2); 
     }
     33% { 
-      transform: translate(1050%, ${height()}) rotate(-60deg) scale(${
+      transform: translate(20vw, ${height()}) rotate(-60deg) scale(${
   scale() + 0.55
 }, ${scale() - 0.45}); 
     }
     48% {
-      transform: translate(1200%, ${height()}) rotate(-30deg) scale(${
+      transform: translate(30vw, ${height()}) rotate(-30deg) scale(${
   scale() - 0.05
 }, ${scale() + 0.4});
     }
     66% { 
-      transform: translate(1400%, 50%) rotate(10deg) scale(.8, .8);
+      transform: translate(40vw, 50%) rotate(10deg) scale(.8, .8);
       opacity: .7;
       border-bottom: none;
     }
     67% {
-      transform: translate(1400%, 50%) rotate(-20deg) scale(.2, .2);
+      transform: translate(40vw, 50%) rotate(-20deg) scale(.2, .2);
       opacity: .2; 
     }
     70% { 
-      transform: translate(1400%, 50%) rotate(-20deg) scale(1, 1);
+      transform: translate(45vw, 50%) rotate(-20deg) scale(1, 1);
       opacity: 0;
     }
 
@@ -155,10 +155,11 @@ const BoneIcon = styled(FaBone)`
 const ProgressBar = ({
   progress = 0,
   showAnswers = false,
-  // quizQuestions = 0,
+  quizQuestions = 0,
   numCorrectAnswers = [],
 }) => {
   // const calcProgress = () => Math.round((progress / quizQuestions) * 100);
+  const calcProgress = () => `${progress} / ${quizQuestions}`;
 
   const [lines, setLines] = useState([
     { character: '-', lineColor: 'inherit' },
@@ -167,7 +168,7 @@ const ProgressBar = ({
     if (progress === 0)
       return setLines(
         numCorrectAnswers.map(() => ({
-          character: <ReactIcon />,
+          character: <ReactIcon size="2em" />,
           lineColor: 'inherit',
         }))
       );
@@ -199,13 +200,13 @@ const ProgressBar = ({
     });
   }, [numCorrectAnswers, progress, showAnswers]);
 
-  // const { completed } = {
-  //   completed: calcProgress(),
-  // };
+  const { completed } = {
+    completed: calcProgress(),
+  };
 
   return (
     <section className="progress-bar">
-      <h3>{`Score:`}</h3>
+      <h3>{`Progress: ${completed}`}</h3>
       {/* <Container> */}
       {lines.map((line, lineIdx) => (
         <Label key={lineIdx + line.lineColor} lineColor={line.lineColor}>
