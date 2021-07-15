@@ -163,7 +163,13 @@ const ProgressBar = ({
   quizQuestions = 0,
   numCorrectAnswers = [],
 }) => {
-  // const calcProgress = () => Math.round((progress / quizQuestions) * 100);
+  const calcScore = () =>
+    numCorrectAnswers.reduce((acc, val) => {
+      if (val === -1) {
+        return acc;
+      }
+      return acc + val;
+    }, 0);
   const calcProgress = () => `${progress} / ${quizQuestions}`;
 
   const [lines, setLines] = useState([
@@ -213,13 +219,17 @@ const ProgressBar = ({
     });
   }, [numCorrectAnswers, progress, showAnswers]);
 
-  const { completed } = {
+  const { completed, totalScore } = {
     completed: calcProgress(),
+    totalScore: calcScore(),
   };
+
+  const showProgress = `Progress: ${completed}`;
+  const showScore = `Total Score: ${totalScore} / ${quizQuestions}`;
 
   return (
     <section className="progress-bar">
-      <h3>{`Progress: ${completed}`}</h3>
+      <h3>{showAnswers ? showScore : showProgress}</h3>
       {/* <Container> */}
       {lines.map((line, lineIdx) => (
         <Label key={lineIdx + line.lineColor} lineColor={line.lineColor}>
