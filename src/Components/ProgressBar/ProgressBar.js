@@ -1,7 +1,7 @@
 import React from 'react';
 import Label from './Label';
 // import Filler from './Filler';
-// import Container from './Container';
+import Container from './Container';
 import { useState, useEffect } from 'react';
 import { FaBone, GiFishbone, DiReact, BsQuestionCircle } from 'react-icons/all';
 import styled, { keyframes, css } from 'styled-components';
@@ -230,13 +230,13 @@ const ProgressBar = ({
   return (
     <section className="progress-bar">
       <h3>{showAnswers ? showScore : showProgress}</h3>
-      {/* <Container> */}
-      {lines.map((line, lineIdx) => (
-        <Label key={lineIdx + line.lineColor} lineColor={line.lineColor}>
-          {line.character}
-        </Label>
-      ))}
-      {/* </Container> */}
+      <Container>
+        {lines.map((line, lineIdx) => (
+          <Label key={lineIdx + line.lineColor} lineColor={line.lineColor}>
+            {line.character}
+          </Label>
+        ))}
+      </Container>
     </section>
   );
 };
