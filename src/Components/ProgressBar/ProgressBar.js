@@ -103,7 +103,7 @@ const FishIcon = styled(GiFishbone)`
 `;
 
 const boneKeyFrames = keyframes`
-    0% { transform: translate(0%, 0%) rotate(0deg) scale(1.5, 1.5);
+    0% { transform: translate(-500%, 0%) rotate(0deg) scale(1.5, 1.5);
       
     }
     33% { 
