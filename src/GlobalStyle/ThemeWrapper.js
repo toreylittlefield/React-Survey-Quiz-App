@@ -15,7 +15,7 @@ const theme = {
   whiteButtonColor: { h: '0', s: '0%', l: '100%' },
   outlineColor: '#0D856E',
   successColor: ['#0FC599', '#45C9AA'],
-  rejectColor: ['rgba(197, 14, 73, 0.7)', '#C50E49', '#E30425'],
+  rejectColor: ['rgba(197, 14, 73, 0.7)', '#C50E49', '#E30425', '#fa115c'],
 };
 
 const ThemeWrapper = ({ children }) => (
