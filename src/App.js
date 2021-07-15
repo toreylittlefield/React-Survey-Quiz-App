@@ -78,7 +78,7 @@ function App() {
           <Loading loading={loading}></Loading>
         ) : (
           <React.Fragment>
-            <QuizTitle title="Example Title Quiz">
+            <QuizTitle title="Quiz Title">
               <ProgressBar
                 showAnswers={showAnswers}
                 progress={progress.length}

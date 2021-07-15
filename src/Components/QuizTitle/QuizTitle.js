@@ -1,13 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const QuizTitleSection = styled.section`
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+`;
 
 const QuizTitle = ({ title = '', children = [] }) => {
   return (
-    <section className="quiz-title">
+    <QuizTitleSection className="quiz-title">
       <header>
-        <h2>{title}</h2>
+        <h1>{title}</h1>
       </header>
       {children}
-    </section>
+    </QuizTitleSection>
   );
 };
 
