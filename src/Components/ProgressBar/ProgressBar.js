@@ -38,32 +38,103 @@ const QuestionIcon = styled(BsQuestionCircle)`
   ${styleQuestion}
 `;
 
+const randomNumber = (multNum = 1, addNum = 0, posNeg = 1, symbol = '') => {
+  const result = posNeg * Math.ceil((1 + Math.random()) * multNum + addNum);
+  if (symbol) return result + symbol;
+  return result;
+};
+
+const height = () => randomNumber(100, 50, -1, '%');
+
+const scale = () => randomNumber(0.5, 0.5);
+
 const fishKeyFrames = keyframes`
-    0% { transform: translate(-5%, 0%) scale(1, 1); }
-    50% { transform: translate(-5%, -3%) scale(1, 1); }
-    55% { transform: translate(5%, -4%) rotate(10deg) scale(1.25, 1.25);}
-    60% { transform: translate(50%, -5%) rotate(-10deg) scale(1.25, 1.25);}
-    65% { transform: translate(0%, -100%) rotate(-75deg) scale(1.25, 1.25);}
-    70% { transform: translate(0%, -100%) rotate(-10deg) scale(1.25, 1.25);}
-    80% { 
-      transform: translate(0%, 0%) rotate(-5deg) scale(1.25, 1.25);
+    0% { transform: translate(0%, 0%) rotate(-70deg) scale(1, 1); }
+    33% { 
+      transform: translate(1250%, ${height()}) rotate(-60deg) scale(${
+  scale() + 0.55
+}, ${scale() - 0.45}); 
+    }
+    48% {
+      transform: translate(1500%, ${height()}) rotate(-30deg) scale(${
+  scale() - 0.05
+}, ${scale() + 0.4});
+    }
+    66% { 
+      transform: translate(2000%, 50%) rotate(10deg) scale(1, 1);
       opacity: 1;
+      border-bottom: none;
     }
-    90% { 
-      transform: translate(0%, -5%) rotate(-5deg) scale(1.25, 1.25);
+    67% {
+      transform: translate(2000%, 50%) rotate(-20deg) scale(1, 1);
+      opacity: 0; 
+    }
+    70% { 
       opacity: 0;
     }
+
     100% { 
-      transform: translate(-5%, 0%) scale(1, 1); 
       opacity: 0;
-      }
+    }
 `;
+
+const timing = () => randomNumber(2200, 1800, 1, 'ms');
+
 const styleFish = css`
-  animation: ${fishKeyFrames} 4s linear 0ms infinite;
+  animation: ${() => fishKeyFrames} ${timing} linear 0ms infinite;
 `;
 
 const FishIcon = styled(GiFishbone)`
-  ${styleFish}
+  ${styleFish};
+  color: ${({ theme }) => theme.rejectColor[2]};
+`;
+
+const boneKeyFrames = keyframes`
+    0% { transform: translate(0%, 0%) rotate(0deg) scale(1.5, 1.5);
+      
+    }
+    33% { 
+      transform: translate(1250%, -300%) rotate(360deg) scale(${
+        scale() + 0.55 + 1
+      }, ${scale() - 0.45 + 1}); 
+    }
+    48% {
+      transform: translate(1500%, -100%) rotate(720deg) scale(${
+        scale() - 0.05 + 1
+      }, ${scale() + 0.4 + 1});
+    }
+    66% { 
+      transform: translate(2000%, -300%) rotate(1080deg) scale(2, 2);
+      opacity: 1;
+    }
+    77% {
+      transform: translate(2400%, -50%) rotate(720deg) scale(2, 2);
+      opacity: .5; 
+    }
+    82% {
+      transform: translate(2500%, -150%) rotate(360deg) scale(1.3, 1.3);
+      opacity: 0; 
+    }
+    87% {
+      transform: translate(2700%, -100%) rotate(720deg) scale(.75, 0.75);
+      opacity: 0; 
+    }
+
+    100% { 
+      opacity: 0;
+    }
+`;
+
+const styleBone = css`
+  animation: ${() => boneKeyFrames} ${timing} linear 0ms infinite;
+`;
+
+const BoneIcon = styled(FaBone)`
+  ${styleBone};
+  color: ${({ theme }) => theme.successColor[0]};
+  padding: 0.2em;
+  border: 1px solid ${({ theme }) => theme.boxShadowLight};
+  border-radius: 30%;
 `;
 
 const ProgressBar = ({
@@ -91,8 +162,8 @@ const ProgressBar = ({
           prev.map((line, lineIdx) => {
             if (lineIdx === answerIdx)
               return {
-                character: !showAnswers ? <QuestionIcon /> : <FaBone />,
-                lineColor: showAnswers ? 'green' : 'inherit',
+                character: !showAnswers ? <QuestionIcon /> : <BoneIcon />,
+                lineColor: showAnswers ? 'inherit' : 'inherit',
               };
             return line;
           })
@@ -103,7 +174,7 @@ const ProgressBar = ({
             if (lineIdx === answerIdx)
               return {
                 character: !showAnswers ? <QuestionIcon /> : <FishIcon />,
-                lineColor: showAnswers ? 'red' : 'inherit',
+                lineColor: showAnswers ? 'inherit' : 'inherit',
               };
             return line;
           })
