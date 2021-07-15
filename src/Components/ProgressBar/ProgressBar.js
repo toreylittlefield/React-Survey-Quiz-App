@@ -29,6 +29,7 @@ const questionKeyFrames = keyframes`
     70% { transform: translate(-5%, -10%) rotate(-15deg); }
     100% { transform: translate(-5%, 10%) scale(1.25, 0.75); }
 `;
+
 const styleQuestion = css`
   animation: ${questionKeyFrames} 3s linear 0ms infinite;
   color: ${({ theme }) => theme.primaryFontColor};
@@ -49,18 +50,18 @@ const height = () => randomNumber(100, 50, -1, '%');
 const scale = () => randomNumber(0.5, 0.5);
 
 const fishKeyFrames = keyframes`
-    0% { transform: translate(0%, 0%) rotate(-70deg) scale(3, 3.5); }
+    0% { transform: translate(-5vw, 0%) rotate(-70deg) scale(4, 3.5); }
     5% { 
-      transform: translate(10vw, -5vw) rotate(-30deg) scale(2.5, 3); 
+      transform: translate(0vw, -5vw) rotate(-30deg) scale(2.5, 3); 
     }
     8% { 
-      transform: translate(11vw, -50%) rotate(-40deg) scale(2.2, 2.5); 
+      transform: translate(5vw, -50%) rotate(-40deg) scale(2.2, 2.5); 
     }
     11% { 
-      transform: translate(12vw, -100%) rotate(-35deg) scale(2.5, 3); 
+      transform: translate(7vw, -100%) rotate(-35deg) scale(2.5, 3); 
     }
     14% { 
-      transform: translate(13vw, -50%) rotate(-40deg) scale(2.2, 2); 
+      transform: translate(10vw, -50%) rotate(-40deg) scale(2.2, 2); 
     }
     33% { 
       transform: translate(20vw, ${height()}) rotate(-60deg) scale(${
@@ -73,16 +74,20 @@ const fishKeyFrames = keyframes`
 }, ${scale() + 0.4});
     }
     66% { 
-      transform: translate(40vw, 50%) rotate(10deg) scale(.8, .8);
+      transform: translate(40vw, 45%) rotate(10deg) scale(.8, .8);
       opacity: .7;
       border-bottom: none;
     }
-    67% {
-      transform: translate(40vw, 50%) rotate(-20deg) scale(.2, .2);
+    70% {
+      transform: translate(45vw, 40%) rotate(-70deg) scale(.6, .6);
+      opacity: .5; 
+    }
+    75% {
+      transform: translate(50vw, 30%) rotate(30deg) scale(.2, .2);
       opacity: .2; 
     }
-    70% { 
-      transform: translate(45vw, 50%) rotate(-20deg) scale(1, 1);
+    85% { 
+      transform: translate(55vw, 20%) rotate(-20deg) scale(1, 1);
       opacity: 0;
     }
 
@@ -178,7 +183,11 @@ const ProgressBar = ({
           prev.map((line, lineIdx) => {
             if (lineIdx === answerIdx)
               return {
-                character: !showAnswers ? <QuestionIcon /> : <BoneIcon />,
+                character: !showAnswers ? (
+                  <QuestionIcon size="2em" />
+                ) : (
+                  <BoneIcon size="1.5em" />
+                ),
                 lineColor: showAnswers ? 'inherit' : 'inherit',
               };
             return line;
@@ -189,7 +198,11 @@ const ProgressBar = ({
           prev.map((line, lineIdx) => {
             if (lineIdx === answerIdx)
               return {
-                character: !showAnswers ? <QuestionIcon /> : <FishIcon />,
+                character: !showAnswers ? (
+                  <QuestionIcon size="2em" />
+                ) : (
+                  <FishIcon size="1.5em" />
+                ),
                 lineColor: showAnswers ? 'inherit' : 'inherit',
               };
             return line;
