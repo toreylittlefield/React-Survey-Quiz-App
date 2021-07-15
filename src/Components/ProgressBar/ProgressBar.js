@@ -73,15 +73,16 @@ const fishKeyFrames = keyframes`
 }, ${scale() + 0.4});
     }
     66% { 
-      transform: translate(1400%, 50%) rotate(10deg) scale(1, 1);
-      opacity: 1;
+      transform: translate(1400%, 50%) rotate(10deg) scale(.8, .8);
+      opacity: .7;
       border-bottom: none;
     }
     67% {
-      transform: translate(1500%, 50%) rotate(-20deg) scale(1, 1);
-      opacity: 0; 
+      transform: translate(1400%, 50%) rotate(-20deg) scale(.2, .2);
+      opacity: .2; 
     }
     70% { 
+      transform: translate(1400%, 50%) rotate(-20deg) scale(1, 1);
       opacity: 0;
     }
 
@@ -103,7 +104,7 @@ const FishIcon = styled(GiFishbone)`
 `;
 
 const boneKeyFrames = keyframes`
-    0% { transform: translate(-500%, 0%) rotate(0deg) scale(1.5, 1.5);
+    0% { transform: translate(-200%, 0%) rotate(0deg) scale(1.5, 1.5);
       
     }
     33% { 
