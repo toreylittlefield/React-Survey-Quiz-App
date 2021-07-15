@@ -271,29 +271,29 @@ const boneKeyFrames = keyframes`
       
     }
     33% { 
-      transform: translate(20vw, -300%) rotate(360deg) scale(${
+      transform: translate(10vw, -300%) rotate(360deg) scale(${
         scale() + 0.55 + 1
       }, ${scale() - 0.45 + 1}); 
     }
     48% {
-      transform: translate(40vw, -100%) rotate(720deg) scale(${
+      transform: translate(25vw, -100%) rotate(720deg) scale(${
         scale() - 0.05 + 1
       }, ${scale() + 0.4 + 1});
     }
     66% { 
-      transform: translate(55vw, -300%) rotate(1080deg) scale(2, 2);
+      transform: translate(35vw, -300%) rotate(1080deg) scale(2, 2);
       opacity: 1;
     }
     77% {
-      transform: translate(65vw, -50%) rotate(720deg) scale(2, 2);
+      transform: translate(40vw, -50%) rotate(720deg) scale(2, 2);
       opacity: .5; 
     }
     82% {
-      transform: translate(70vw, -150%) rotate(360deg) scale(1.3, 1.3);
+      transform: translate(45vw, -150%) rotate(360deg) scale(1.3, 1.3);
       opacity: 0; 
     }
     87% {
-      transform: translate(72vw, -100%) rotate(720deg) scale(.75, 0.75);
+      transform: translate(55vw, -100%) rotate(720deg) scale(.75, 0.75);
       opacity: 0; 
     }
 
