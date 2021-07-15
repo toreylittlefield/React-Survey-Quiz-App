@@ -80,6 +80,7 @@ function App() {
           <React.Fragment>
             <QuizTitle title="Example Title Quiz">
               <ProgressBar
+                showAnswers={showAnswers}
                 progress={progress.length}
                 quizQuestions={quizQuestions.length}
                 numCorrectAnswers={numCorrectAnswers}
