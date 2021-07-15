@@ -49,7 +49,7 @@ const height = () => randomNumber(100, 50, -1, '%');
 const scale = () => randomNumber(0.5, 0.5);
 
 const fishKeyFrames = keyframes`
-    0% { transform: translate(0%, 0%) rotate(-70deg) scale(1.5, 2); }
+    0% { transform: translate(0%, 0%) rotate(-70deg) scale(3, 3.5); }
     5% { 
       transform: translate(200%, -100%) rotate(-30deg) scale(2.5, 3); 
     }
