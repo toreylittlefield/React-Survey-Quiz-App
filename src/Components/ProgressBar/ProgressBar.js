@@ -49,16 +49,168 @@ const height = () => randomNumber(100, 50, -1, '%');
 
 const scale = () => randomNumber(0.5, 0.5);
 
+const fishKeyFrameGenerator = () => {
+  const percentages = [...Array(20).keys()];
+  const keyFrame = (
+    percent = 0,
+    translateX = 0,
+    translateY = 0,
+    rotate = 0,
+    scaleX = 0,
+    scaleY = 0,
+    opacity = 1
+  ) => `${percent}% {
+    transform: translate(${translateX}vw, ${translateY}%) rotate(${rotate}deg) scale(${scaleX}, ${scaleY});
+    opacity: ${opacity};
+  }`;
+  let lastKey = 0;
+  let lastIndex = 0;
+  return percentages.map((key, index) => {
+    if (index === 0) {
+      return keyFrame(key, key, -2, 0, 0, 0, 1);
+    }
+    if (index === percentages.length - 1) {
+      key = 100;
+      return keyFrame(key, key, 450, 70, 0, 0, 0);
+    } else {
+      key *= 5;
+      if (key >= 50) {
+        key = (key / 2) * 4 - index;
+      }
+    }
+    if (lastIndex === 0) {
+      lastKey = key;
+      lastIndex++;
+      return keyFrame(
+        key,
+        key,
+        70,
+        randomNumber(1, 360),
+        randomNumber(0.5, 0.3),
+        randomNumber(0.5, 0.3)
+      );
+    }
+    if (lastIndex === 1) {
+      lastIndex++;
+      return keyFrame(
+        lastKey + 1,
+        lastKey + 1,
+        randomNumber(1, 350),
+        -90,
+        2,
+        2
+      );
+    }
+    lastIndex = 0;
+    return keyFrame(key, key, -350, -90, 2, 2);
+  });
+};
+
+const frames = fishKeyFrameGenerator();
+console.log({ frames });
+
 const fishKeyFrames = keyframes`
-    0% { transform: translate(-5vw, 0%) rotate(-70deg) scale(4, 3.5); }
+${frames}
+/* 0% {
+  transform: translate(-2vw, 0%) rotate(0deg) scale(2, 2);
+}
+5% {
+  transform: translate(3vw, 350%) rotate(70deg) scale(4, 3.5);
+}
+7% {
+  transform: translate(4vw, 350%) rotate(70deg) scale(4, 3.5);
+}
+10% {
+  transform: translate(7vw, -350%) rotate(-70deg) scale(4, 3);
+}
+15% {
+  transform: translate(12vw, 350%) rotate(70deg) scale(2, 2);
+}
+17% {
+  transform: translate(14svw, 350%) rotate(-70deg) scale(2.5, 3);
+}
+20% {
+  transform: translate(18vw, -400%) rotate(-70deg) scale(1.5, 1.5);
+}
+25% {
+  transform: translate(23vw, 350%) rotate(70deg) scale(1, 1);
+}
+30% {
+  transform: translate(28vw, -300%) rotate(-90deg) scale(0.8, 0.8);
+}
+35% {
+  transform: translate(33vw, 375%) rotate(70deg) scale(1.5, 1.3);
+}
+40% {
+  transform: translate(38vw, -275%) rotate(-90deg) scale(2, 2);
+}
+45% {
+  transform: translate(43vw, 350%) rotate(70deg) scale(2.5, 2.7);
+}
+45% {
+  transform: translate(48vw, -300%) rotate(-70deg) scale(3, 3.3);
+}
+50% {
+  transform: translate(53vw, 350%) rotate(-70deg) scale(3.3, 3);
+}
+55% {
+  transform: translate(57vw, 0%) rotate(70deg) scale(4, 3.5);
+}
+60% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+65% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+70% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+75% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+80% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+85% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+90% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+95% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+100% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+} */
+
+
+
+/* 
+0% {
+  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
+}
+25% {
+  transform: translate(10vw, -300%) rotate(-70deg) scale(4, 3.5);
+}
+50% {
+  transform: translate(20vw, 300%) rotate(-70deg) scale(4, 3.5);
+}
+75% {
+  transform: translate(30vw, 300%) rotate(-70deg) scale(4, 3.5);
+}
+100% {
+  transform: translate(40vw, 300%) rotate(-70deg) scale(4, 3.5);
+} */
+    /* 0% { transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5); }
     5% { 
-      transform: translate(0vw, -5vw) rotate(-30deg) scale(2.5, 3); 
+      transform: translate(0vw, -30%) rotate(-30deg) scale(2.5, 3); 
     }
     8% { 
-      transform: translate(5vw, -50%) rotate(-40deg) scale(2.2, 2.5); 
+      transform: translate(5vw, -100%) rotate(-40deg) scale(2.2, 2.5); 
     }
     11% { 
-      transform: translate(7vw, -100%) rotate(-35deg) scale(2.5, 3); 
+      transform: translate(7vw, -90%) rotate(-35deg) scale(2.5, 3); 
     }
     14% { 
       transform: translate(10vw, -50%) rotate(-40deg) scale(2.2, 2); 
@@ -93,10 +245,10 @@ const fishKeyFrames = keyframes`
 
     100% { 
       opacity: 0;
-    }
+    } */
 `;
 
-const timing = () => randomNumber(2200, 1800, 1, 'ms');
+const timing = () => randomNumber(2200, 10000, 1, 'ms');
 
 const styleFish = css`
   animation: ${() => fishKeyFrames} ${timing} linear 1800ms infinite;
