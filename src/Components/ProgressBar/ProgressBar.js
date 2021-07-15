@@ -268,15 +268,18 @@ const FishIcon = styled(GiFishbone)`
 
 const boneKeyFrames = keyframes`
     0% { transform: translate(-10vw, 0%) rotate(0deg) scale(1.5, 1.5);
-      
+      opacity: 0;
+    }
+    10% { transform: translate(-5vw, 0%) rotate(270deg) scale(3, 3);
+      opacity: 1;
     }
     33% { 
-      transform: translate(10vw, -300%) rotate(360deg) scale(${
+      transform: translate(10vw, -300%) rotate(1080deg) scale(${
         scale() + 0.55 + 1
       }, ${scale() - 0.45 + 1}); 
     }
     48% {
-      transform: translate(25vw, -100%) rotate(720deg) scale(${
+      transform: translate(25vw, -100%) rotate(360deg) scale(${
         scale() - 0.05 + 1
       }, ${scale() + 0.4 + 1});
     }
