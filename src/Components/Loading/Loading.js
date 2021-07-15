@@ -1,7 +1,7 @@
 import React from 'react';
 import LoadingWrapper from './LoadingWrapper';
 import LoadingMessage from './LoadingMessage';
-import useLoadingHook from './useLoadingHook';
+import useLoadingHook from '../../Hooks/useLoadingHook';
 
 // // Variables For Timing
 const SWITCH_MESSAGE_ON_COUNT = 1000;
