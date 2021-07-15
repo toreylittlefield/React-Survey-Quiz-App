@@ -22,7 +22,8 @@ const correctChoiceSelected = css`
 `;
 
 const notCorrectChoiceSelected = css`
-  color: ${({ theme }) => theme.primaryFontColor};
+  color: ${({ theme }) => theme.rejectColor[3]};
+  /* background-color: ${({ theme }) => theme.rejectColor[0]}; */
 `;
 
 const answeredStyles = css`
@@ -88,13 +89,19 @@ const QuizCardSection = styled.section`
   width: 50vw;
   max-width: 80%;
   padding: 2em 0;
-  background: ${({ theme, value, correctChoiceIndex, showAnswers }) => {
-    if (!showAnswers) {
+  background: ${({
+    theme,
+    value,
+    correctChoiceIndex,
+    isVisible,
+    showAnswers,
+  }) => {
+    if (isVisible && !showAnswers) {
       if (value === null) return `var(--bg-color)`;
       return `var(--alt-bg-color)`;
     }
     if (correctChoiceIndex === value) return `var(--bg-color)`;
-    return theme.rejectColor[0];
+    return `var(--bg-color)`; //theme.primaryFontColor;
   }};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
@@ -127,10 +134,16 @@ const QuizCardSection = styled.section`
 
   ::after {
     width: 100%;
-    background: ${({ theme, value, correctChoiceIndex, showAnswers }) => {
-      if (showAnswers) {
+    background: ${({
+      theme,
+      value,
+      correctChoiceIndex,
+      isVisible,
+      showAnswers,
+    }) => {
+      if (showAnswers || !isVisible) {
         if (value === correctChoiceIndex) return theme.successColor[0];
-        return theme.primaryFontColor;
+        return theme.rejectColor[3];
       }
       return theme.primaryFontColor;
     }};
