@@ -68,7 +68,7 @@ const fishKeyFrameGenerator = () => {
   let opacity = 1;
   return percentages.map((key, index) => {
     if (index === 0) {
-      return keyFrame(key, key, -2, 0, 0, 0, 1);
+      return keyFrame(key, key, -2, 0, 0, 0, 0.7);
     }
     if (index >= 10) {
       opacity = 0;
