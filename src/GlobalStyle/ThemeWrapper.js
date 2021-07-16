@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 //'#45C9AA',
 const theme = {
   primaryFontColor: '#DBDDE5',
+  primaryFontColorRGB: '219, 221, 229',
   secondaryFontColor: '#7B7B7B',
   primaryBgColor: '#141A33',
   secondaryBgColor: '#222D58',
