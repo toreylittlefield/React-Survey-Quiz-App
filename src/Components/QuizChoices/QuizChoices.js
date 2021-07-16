@@ -85,12 +85,14 @@ const QuizChoices = ({
   setchoicesSelected = () => {},
 }) => {
   const handleAnswer = (choiceIdx, correctAnswerIndex) => {
+    if (!showAnswers) return;
     if (choiceIdx === correctAnswerIndex) {
-      console.log({ choiceIdx, correctAnswerIndex });
       return true;
     }
     return false;
   };
+
+  const isSelected = () => choicesSelected[quizIdx][`quizid${id}`];
 
   return (
     <ChoicesWrapper>
@@ -106,6 +108,7 @@ const QuizChoices = ({
               type="radio"
               value={choice.text}
               disabled={showAnswers}
+              checked={isSelected() === choiceIdx}
               onClick={() => {
                 setNumberCorrectAnswers(
                   numCorrectAnswers.map((answer, answerIdx) => {
