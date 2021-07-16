@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const RadioLabelText = styled.span`
   line-height: 1;
@@ -16,7 +16,25 @@ const RadioController = styled.span`
   transform: translateY(0.2em);
 `;
 
+const showAnswerBackground = css`
+  ${({ theme, showAnswers, isAnswer }) => {
+    if (!showAnswers) return;
+    if (isAnswer) {
+      return css`
+        border: 1px double ${theme.successColor[2]};
+        border-radius: 5px;
+        color: ${theme.successColor[0]};
+      `;
+    }
+    return css`
+      /* border: 1px solid red; */
+    `;
+  }}
+`;
+
 const CustomLabel = styled.label`
+  ${showAnswerBackground}
+  padding: 0.5em;
   margin: 0.5em;
   display: grid;
   grid-template-columns: min-content auto;
@@ -66,10 +84,22 @@ const QuizChoices = ({
   choicesSelected = [{}],
   setchoicesSelected = () => {},
 }) => {
+  const handleAnswer = (choiceIdx, correctAnswerIndex) => {
+    if (choiceIdx === correctAnswerIndex) {
+      console.log({ choiceIdx, correctAnswerIndex });
+      return true;
+    }
+    return false;
+  };
+
   return (
     <ChoicesWrapper>
       {choices.map((choice, choiceIdx) => (
-        <CustomLabel key={id + choice.text}>
+        <CustomLabel
+          key={id + choice.text}
+          isAnswer={handleAnswer(choiceIdx, correctChoiceIndex)}
+          showAnswers={showAnswers}
+        >
           <RadioInputSpan>
             <CustomInput
               name={id}
