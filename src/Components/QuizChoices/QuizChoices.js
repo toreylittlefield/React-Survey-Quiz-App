@@ -1,4 +1,58 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const RadioLabelText = styled.span`
+  line-height: 1;
+  transition: 180ms all ease-in-out;
+  opacity: 0.85;
+`;
+
+const RadioController = styled.span`
+  display: block;
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 50%;
+  border: 0.1em solid currentcolor;
+  transform: translateY(0.2em);
+`;
+
+const CustomLabel = styled.label`
+  margin: 0.5em;
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.5em;
+  overflow-wrap: break-word;
+  &:focus-within {
+    ${RadioLabelText} {
+      transform: scale(1.05) translateX(2.5%);
+      opacity: 1;
+    }
+  }
+
+  & input:checked + ${RadioController} {
+    background: radial-gradient(currentColor 35%, rgba(255, 0, 0, 0) 0%);
+  }
+`;
+
+const CustomInput = styled.input`
+  opacity: 0;
+  width: 0;
+  height: 0;
+  &:focus + ${RadioController} {
+    box-shadow: 0 0 0 0.05em currentColor, 0 0 0.15em 0.1em currentcolor;
+  }
+`;
+
+const RadioInputSpan = styled.span`
+  display: flex;
+`;
+
+const ChoicesWrapper = styled.div`
+  display: flex;
+  margin-top: 0.25em;
+  flex-direction: column;
+  flex-wrap: nowrap;
+`;
 
 const QuizChoices = ({
   id = 0,
@@ -13,11 +67,11 @@ const QuizChoices = ({
   setchoicesSelected = () => {},
 }) => {
   return (
-    <React.Fragment>
+    <ChoicesWrapper>
       {choices.map((choice, choiceIdx) => (
-        <div key={id + choice.text}>
-          <label>
-            <input
+        <CustomLabel key={id + choice.text}>
+          <RadioInputSpan>
+            <CustomInput
               name={id}
               type="radio"
               value={choice.text}
@@ -51,11 +105,12 @@ const QuizChoices = ({
                 );
               }}
             />
-            <span>{choice.text}</span>
-          </label>
-        </div>
+            <RadioController />
+          </RadioInputSpan>
+          <RadioLabelText>{choice.text}</RadioLabelText>
+        </CustomLabel>
       ))}
-    </React.Fragment>
+    </ChoicesWrapper>
   );
 };
 
