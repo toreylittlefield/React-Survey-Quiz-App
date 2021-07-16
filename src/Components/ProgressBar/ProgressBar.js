@@ -318,6 +318,51 @@ const BoneIcon = styled(FaBone)`
   z-index: 0;
 `;
 
+const StyledSpan = styled.span`
+  color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 1);
+`;
+
+const FirstLetter = styled.span`
+  ${({ totalScore }) => {
+    if (totalScore) {
+      return css`
+        color: ${({ theme }) => theme.successColor[0]};
+      `;
+    }
+    return css`
+      color: ${({ theme }) => theme.rejectColor[3]};
+    `;
+  }}
+`;
+
+const ShowProgress = ({ completed = 0 }) => (
+  <React.Fragment>
+    {`Progress: `}
+    <StyledSpan>{completed}</StyledSpan>
+  </React.Fragment>
+);
+const ShowScore = ({ totalScore = 0, quizQuestions = 0 }) => (
+  <React.Fragment>
+    {`Total Score: `}
+    <StyledSpan>
+      <FirstLetter totalScore={totalScore}>{totalScore}</FirstLetter>{' '}
+      <FirstLetter totalScore={totalScore}>{`/ `}</FirstLetter>
+      <FirstLetter totalScore={totalScore}>{quizQuestions}</FirstLetter>
+    </StyledSpan>
+  </React.Fragment>
+);
+
+const ScoreBoardH3 = styled.h3`
+  color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 0.85);
+  font-size: 1.25em;
+`;
+
+const ProgressBarContainer = styled.div`
+  @media (max-width: 480px) {
+    align-self: center;
+  }
+`;
+
 const ProgressBar = ({
   progress = 0,
   showAnswers = false,
@@ -385,54 +430,15 @@ const ProgressBar = ({
     totalScore: calcScore(),
   };
 
-  const StyledSpan = styled.span`
-    color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 1);
-  `;
-
-  const FirstLetter = styled.span`
-    ${({ totalScore }) => {
-      if (totalScore) {
-        return css`
-          color: ${({ theme }) => theme.successColor[0]};
-        `;
-      }
-      return css`
-        color: ${({ theme }) => theme.rejectColor[3]};
-      `;
-    }}
-  `;
-
-  const showProgress = (
-    <React.Fragment>
-      {`Progress: `}
-      <StyledSpan>{completed}</StyledSpan>
-    </React.Fragment>
-  );
-  const showScore = (
-    <React.Fragment>
-      {`Total Score: `}
-      <StyledSpan>
-        <FirstLetter totalScore={totalScore}>{totalScore}</FirstLetter>{' '}
-        <FirstLetter totalScore={totalScore}>{`/ `}</FirstLetter>
-        <FirstLetter totalScore={totalScore}>{quizQuestions}</FirstLetter>
-      </StyledSpan>
-    </React.Fragment>
-  );
-
-  const ScoreBoardH3 = styled.h3`
-    color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 0.85);
-    font-size: 1.25em;
-  `;
-
-  const ProgressBarContainer = styled.div`
-    @media (max-width: 480px) {
-      align-self: center;
-    }
-  `;
-
   return (
     <ProgressBarContainer className="progress-bar">
-      <ScoreBoardH3>{showAnswers ? showScore : showProgress}</ScoreBoardH3>
+      <ScoreBoardH3>
+        {showAnswers ? (
+          <ShowScore {...{ totalScore, quizQuestions }} />
+        ) : (
+          <ShowProgress {...{ completed }} />
+        )}
+      </ScoreBoardH3>
       <Container>
         {lines.map((line, lineIdx) => (
           <Label key={lineIdx + line.lineColor} lineColor={line.lineColor}>
