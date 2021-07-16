@@ -385,30 +385,43 @@ const ProgressBar = ({
     totalScore: calcScore(),
   };
 
+  const StyledSpan = styled.span`
+    color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 1);
+  `;
+
+  const FirstLetter = styled.span`
+    ${({ totalScore }) => {
+      if (totalScore) {
+        return css`
+          color: ${({ theme }) => theme.successColor[0]};
+        `;
+      }
+      return css`
+        color: ${({ theme }) => theme.rejectColor[3]};
+      `;
+    }}
+  `;
+
   const showProgress = (
     <React.Fragment>
-      <h3>
-        {`Progress: `}
-        <span>{completed}</span>
-      </h3>
+      {`Progress: `}
+      <StyledSpan>{completed}</StyledSpan>
     </React.Fragment>
   );
   const showScore = (
     <React.Fragment>
       {`Total Score: `}
-      <span>
-        {totalScore} / {quizQuestions}
-      </span>
+      <StyledSpan>
+        <FirstLetter totalScore={totalScore}>{totalScore}</FirstLetter>{' '}
+        <FirstLetter totalScore={totalScore}>{`/ `}</FirstLetter>
+        <FirstLetter totalScore={totalScore}>{quizQuestions}</FirstLetter>
+      </StyledSpan>
     </React.Fragment>
   );
 
-  const ScoreBoardH3 = styled.div`
-    h3 {
-      color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 0.5);
-    }
-    h3 span {
-      color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 1);
-    }
+  const ScoreBoardH3 = styled.h3`
+    color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 0.85);
+    font-size: 1.25em;
   `;
 
   const ProgressBarContainer = styled.div`
