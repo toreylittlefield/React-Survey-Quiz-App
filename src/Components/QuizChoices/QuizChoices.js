@@ -26,20 +26,37 @@ const showAnswerBackground = css`
         color: ${theme.successColor[0]};
       `;
     }
-    return css`
-      /* border: 1px solid red; */
-    `;
+    return;
   }}
 `;
-
+const showSelected = css`
+  ${({ showAnswers, isSelected, isAnswer, theme }) => {
+    if (!showAnswers) return;
+    const selected = isSelected;
+    console.log({ selected });
+    if (!isAnswer && selected) {
+      return css`
+        border: 1px double currentColor;
+        border-radius: 5px;
+      `;
+    }
+  }}
+`;
 const CustomLabel = styled.label`
-  ${showAnswerBackground}
+  ${showAnswerBackground};
+  ${showSelected};
   padding: 0.5em;
   margin: 0.5em;
   display: grid;
   grid-template-columns: min-content auto;
   grid-gap: 0.5em;
-  overflow-wrap: break-word;
+  @media (max-width: 480px) {
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    font-size: 1.05em;
+  }
   &:focus-within {
     ${RadioLabelText} {
       transform: scale(1.05) translateX(2.5%);
@@ -101,6 +118,7 @@ const QuizChoices = ({
           key={id + choice.text}
           isAnswer={handleAnswer(choiceIdx, correctChoiceIndex)}
           showAnswers={showAnswers}
+          isSelected={isSelected() === choiceIdx}
         >
           <RadioInputSpan>
             <CustomInput
@@ -109,7 +127,7 @@ const QuizChoices = ({
               value={choice.text}
               disabled={showAnswers}
               checked={isSelected() === choiceIdx}
-              onClick={() => {
+              onChange={() => {
                 setNumberCorrectAnswers(
                   numCorrectAnswers.map((answer, answerIdx) => {
                     if (answerIdx === quizIdx) {
