@@ -1,6 +1,5 @@
 import React from 'react';
 import Label from './Label';
-// import Filler from './Filler';
 import Container from './Container';
 import { useState, useEffect } from 'react';
 import { FaBone, GiFishbone, DiReact, BsQuestionCircle } from 'react-icons/all';
@@ -44,8 +43,6 @@ const randomNumber = (multNum = 1, addNum = 0, posNeg = 1, symbol = '') => {
   if (symbol) return result + symbol;
   return result;
 };
-
-const height = () => randomNumber(100, 50, -1, '%');
 
 const scale = () => randomNumber(0.5, 0.5);
 
@@ -112,149 +109,11 @@ const fishKeyFrameGenerator = () => {
   });
 };
 
-const frames = fishKeyFrameGenerator();
-console.log({ frames });
-
 const fishKeyFrames = keyframes`
 ${fishKeyFrameGenerator()}
-/* 0% {
-  transform: translate(-2vw, 0%) rotate(0deg) scale(2, 2);
-}
-5% {
-  transform: translate(3vw, 350%) rotate(70deg) scale(4, 3.5);
-}
-7% {
-  transform: translate(4vw, 350%) rotate(70deg) scale(4, 3.5);
-}
-10% {
-  transform: translate(7vw, -350%) rotate(-70deg) scale(4, 3);
-}
-15% {
-  transform: translate(12vw, 350%) rotate(70deg) scale(2, 2);
-}
-17% {
-  transform: translate(14svw, 350%) rotate(-70deg) scale(2.5, 3);
-}
-20% {
-  transform: translate(18vw, -400%) rotate(-70deg) scale(1.5, 1.5);
-}
-25% {
-  transform: translate(23vw, 350%) rotate(70deg) scale(1, 1);
-}
-30% {
-  transform: translate(28vw, -300%) rotate(-90deg) scale(0.8, 0.8);
-}
-35% {
-  transform: translate(33vw, 375%) rotate(70deg) scale(1.5, 1.3);
-}
-40% {
-  transform: translate(38vw, -275%) rotate(-90deg) scale(2, 2);
-}
-45% {
-  transform: translate(43vw, 350%) rotate(70deg) scale(2.5, 2.7);
-}
-45% {
-  transform: translate(48vw, -300%) rotate(-70deg) scale(3, 3.3);
-}
-50% {
-  transform: translate(53vw, 350%) rotate(-70deg) scale(3.3, 3);
-}
-55% {
-  transform: translate(57vw, 0%) rotate(70deg) scale(4, 3.5);
-}
-60% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-65% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-70% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-75% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-80% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-85% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-90% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-95% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-100% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-} */
-
-
-
-/* 
-0% {
-  transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5);
-}
-25% {
-  transform: translate(10vw, -300%) rotate(-70deg) scale(4, 3.5);
-}
-50% {
-  transform: translate(20vw, 300%) rotate(-70deg) scale(4, 3.5);
-}
-75% {
-  transform: translate(30vw, 300%) rotate(-70deg) scale(4, 3.5);
-}
-100% {
-  transform: translate(40vw, 300%) rotate(-70deg) scale(4, 3.5);
-} */
-    /* 0% { transform: translate(-2vw, 0%) rotate(-70deg) scale(4, 3.5); }
-    5% { 
-      transform: translate(0vw, -30%) rotate(-30deg) scale(2.5, 3); 
-    }
-    8% { 
-      transform: translate(5vw, -100%) rotate(-40deg) scale(2.2, 2.5); 
-    }
-    11% { 
-      transform: translate(7vw, -90%) rotate(-35deg) scale(2.5, 3); 
-    }
-    14% { 
-      transform: translate(10vw, -50%) rotate(-40deg) scale(2.2, 2); 
-    }
-    33% { 
-      transform: translate(20vw, ${height()}) rotate(-60deg) scale(${
-  scale() + 0.55
-}, ${scale() - 0.45}); 
-    }
-    48% {
-      transform: translate(30vw, ${height()}) rotate(-30deg) scale(${
-  scale() - 0.05
-}, ${scale() + 0.4});
-    }
-    66% { 
-      transform: translate(40vw, 45%) rotate(10deg) scale(.8, .8);
-      opacity: .7;
-      border-bottom: none;
-    }
-    70% {
-      transform: translate(45vw, 40%) rotate(-70deg) scale(.6, .6);
-      opacity: .5; 
-    }
-    75% {
-      transform: translate(50vw, 30%) rotate(30deg) scale(.2, .2);
-      opacity: .2; 
-    }
-    85% { 
-      transform: translate(55vw, 20%) rotate(-20deg) scale(1, 1);
-      opacity: 0;
-    }
-
-    100% { 
-      opacity: 0;
-    } */
 `;
 
-const timing = () => randomNumber(2200, 10000, 1, 'ms');
+const timing = () => randomNumber(2200, 8000, 1, 'ms');
 
 const styleFish = css`
   animation: ${() => fishKeyFrames} ${timing} linear 800ms infinite;
