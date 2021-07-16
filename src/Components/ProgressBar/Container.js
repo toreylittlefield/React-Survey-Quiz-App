@@ -5,8 +5,9 @@ const containerStyles = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
   @media (max-width: 480px) {
-    justify-content: center;
+    justify-content: space-around;
   }
 `;
 
