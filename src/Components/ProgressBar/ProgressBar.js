@@ -257,7 +257,7 @@ ${fishKeyFrameGenerator()}
 const timing = () => randomNumber(2200, 10000, 1, 'ms');
 
 const styleFish = css`
-  animation: ${() => fishKeyFrames} ${timing} linear 1800ms infinite;
+  animation: ${() => fishKeyFrames} ${timing} linear 800ms infinite;
 `;
 
 const FishIcon = styled(GiFishbone)`
@@ -267,8 +267,8 @@ const FishIcon = styled(GiFishbone)`
 `;
 
 const boneKeyFrames = keyframes`
-    0% { transform: translate(-10vw, 0%) rotate(0deg) scale(1.5, 1.5);
-      opacity: 0;
+    0% { transform: translate(-1vw, 0%) rotate(0deg) scale(1.5, 1.5);
+      opacity: 1;
     }
     10% { transform: translate(-5vw, 0%) rotate(270deg) scale(3, 3);
       opacity: 1;
@@ -385,8 +385,31 @@ const ProgressBar = ({
     totalScore: calcScore(),
   };
 
-  const showProgress = `Progress: ${completed}`;
-  const showScore = `Total Score: ${totalScore} / ${quizQuestions}`;
+  const showProgress = (
+    <React.Fragment>
+      <h3>
+        {`Progress: `}
+        <span>{completed}</span>
+      </h3>
+    </React.Fragment>
+  );
+  const showScore = (
+    <React.Fragment>
+      {`Total Score: `}
+      <span>
+        {totalScore} / {quizQuestions}
+      </span>
+    </React.Fragment>
+  );
+
+  const ScoreBoardH3 = styled.div`
+    h3 {
+      color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 0.5);
+    }
+    h3 span {
+      color: rgba(${({ theme }) => theme.primaryFontColorRGB}, 1);
+    }
+  `;
 
   const ProgressBarContainer = styled.div`
     @media (max-width: 480px) {
@@ -396,7 +419,7 @@ const ProgressBar = ({
 
   return (
     <ProgressBarContainer className="progress-bar">
-      <h3>{showAnswers ? showScore : showProgress}</h3>
+      <ScoreBoardH3>{showAnswers ? showScore : showProgress}</ScoreBoardH3>
       <Container>
         {lines.map((line, lineIdx) => (
           <Label key={lineIdx + line.lineColor} lineColor={line.lineColor}>
