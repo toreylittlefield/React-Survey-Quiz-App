@@ -15,7 +15,7 @@ const theme = {
   alternateButtonColor: { h: '0', s: '0%', l: '87%' },
   whiteButtonColor: { h: '0', s: '0%', l: '100%' },
   outlineColor: '#0D856E',
-  successColor: ['#0FC599', '#45C9AA'],
+  successColor: ['#0FC599', '#45C9AA', 'rgba(15, 197, 153, 0.7)'],
   rejectColor: ['rgba(197, 14, 73, 0.7)', '#C50E49', '#E30425', '#fa115c'],
 };
 
