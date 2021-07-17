@@ -91,10 +91,13 @@ function App() {
               />
             </QuizTitle>
 
-            {/* Quiz Item */}
+            {/* Quiz Items */}
             <QuizItems {...{ quizQuestions, ...props }}>
               <QuizChoices />
             </QuizItems>
+            {/* End Quiz Items */}
+
+            {/* Submit Button */}
             <Button
               disabled={!data.length || showAnswers}
               onClick={() => setShowAnswers(true)}
@@ -104,26 +107,23 @@ function App() {
             </Button>
 
             {/* Button To Clear & Try Again */}
-            {showAnswers && (
-              <Button
-                color="white"
-                onClick={() => {
-                  setShowAnswers(false);
-                  setProgress([]);
-                  setchoicesSelected(
-                    choicesSelected.map((quiz) => {
-                      const [key] = Object.entries(quiz).flat(2);
-                      return (quiz[key] = { [key]: null });
-                    })
-                  );
-                  setNumberCorrectAnswers(
-                    Array.from(numCorrectAnswers).fill(-1)
-                  );
-                }}
-              >
-                Try Again
-              </Button>
-            )}
+            <Button
+              hideButton={!showAnswers}
+              color="white"
+              onClick={() => {
+                setShowAnswers(false);
+                setProgress([]);
+                setchoicesSelected(
+                  choicesSelected.map((quiz) => {
+                    const [key] = Object.entries(quiz).flat(2);
+                    return (quiz[key] = { [key]: null });
+                  })
+                );
+                setNumberCorrectAnswers(Array.from(numCorrectAnswers).fill(-1));
+              }}
+            >
+              Try Again
+            </Button>
             {/* End Quiz Item */}
             {/* Show Answers & Display User Answers */}
             {showAnswers && (

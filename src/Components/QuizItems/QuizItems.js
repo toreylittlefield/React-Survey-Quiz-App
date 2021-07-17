@@ -5,11 +5,7 @@ import styled from 'styled-components';
 const QuizItemsContainer = styled.div`
   display: grid;
   width: 100%;
-  /* grid-gap: ${({ progress }) => (progress ? `0em` : `2em`)}; */
   place-items: center;
-  @media (max-width: 480px) {
-    /* grid-gap: ${({ progress }) => (progress ? `0em` : `3.5em`)}; */
-  }
 `;
 
 const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
@@ -22,17 +18,10 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
       behavior: 'smooth',
     });
   };
-  const {
-    choicesSelected = [{ key: '' }],
-    showAnswers = false,
-    progress,
-  } = props;
+  const { choicesSelected = [{ key: '' }], showAnswers = false } = props;
 
   return (
-    <QuizItemsContainer
-      progress={!showAnswers && progress.length === quizQuestions.length}
-      id="wrapper"
-    >
+    <QuizItemsContainer id="quiz-items-container">
       {quizQuestions.map((quizQuestion = {}, quizIdx) => {
         const { id, word, correctChoiceIndex } = quizQuestion;
         const childrenwithprops = Children.map(children, (element) =>
