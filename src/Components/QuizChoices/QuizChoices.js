@@ -52,10 +52,10 @@ const CustomLabel = styled.label`
   grid-gap: 0.5em;
   @media (max-width: 480px) {
     margin-left: 0.1em;
-    margin-right: 0.1em;
+    margin-right: 0em;
     padding-left: 0.25em;
-    padding-right: 0.25em;
-    font-size: 1.05em;
+    padding-right: 0em;
+    font-size: 1.25em;
   }
   &:focus-within {
     ${RadioLabelText} {

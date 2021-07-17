@@ -54,6 +54,14 @@ const hoverDefault = css`
   transform: scale(1);
   font-size: 1.5rem;
   line-height: 2.5rem;
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    & label {
+      font-size: 1.3em;
+      padding: 0em;
+      transition: font-size 50ms linear 50ms;
+    }
+  }
 `;
 
 const hoverCSS = css`
@@ -88,7 +96,7 @@ const QuizCardSection = styled.section`
   cursor: pointer;
   width: 50vw;
   max-width: 80%;
-  padding: 2em 0;
+  padding: 1.5em 0em 1em 0em;
   background: ${({
     theme,
     value,
