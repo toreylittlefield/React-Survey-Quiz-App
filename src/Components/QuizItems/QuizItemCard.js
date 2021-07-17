@@ -17,6 +17,26 @@ const selectedChoiceTransition = css`
   transition-duration: 600ms, 500ms, 500ms, 500ms, 500ms, 500ms;
 `;
 
+const QuizItemSpacer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  margin-bottom: -2em;
+  width: 100%;
+  ${({ showAnswers, isVisible }) => {
+    if (showAnswers) return;
+    if (!isVisible) {
+      return css`
+        margin-top: 0em;
+        margin-bottom: 0em;
+        visibility: hidden;
+        /* width: 0; */
+        /* transition: all 600ms linear; */
+      `;
+    }
+  }}
+`;
+
 const correctChoiceSelected = css`
   color: ${({ theme }) => theme.successColor[1]};
 `;
@@ -97,6 +117,7 @@ const QuizCardSection = styled.section`
   width: 50vw;
   max-width: 80%;
   padding: 1.5em 0em 1em 0em;
+  margin-bottom: 2em;
   @media (max-width: 480px) {
     ${({ showAnswers }) => {
       if (!showAnswers) return;
@@ -127,14 +148,13 @@ const QuizCardSection = styled.section`
   }};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
-  /* margin-bottom: 2em; */
   border-radius: var(--border-radius);
   ${({ answered }) =>
     answered === false ? notYetAnsweredStyles : answeredStyles};
 
-  section :last-child {
+  /* section :last-child {
     margin-bottom: 10em;
-  }
+  } */
 
   ::before,
   ::after {
@@ -261,24 +281,26 @@ const QuizItemCard = ({
   };
 
   return (
-    <QuizCardSection
-      ref={domNode}
-      {...{
-        ...props,
-        showAnswers,
-        value,
-        correctChoiceIndex,
-        answered,
-        onMouseLeave: handleOnMouseLeave,
-        onMouseEnter: handleOnMouseEnter,
-        onClick: handleClick,
-        cardNumber,
-        isActive,
-        isVisible,
-      }}
-    >
-      <QuizCardContent>{children}</QuizCardContent>
-    </QuizCardSection>
+    <QuizItemSpacer isVisible={isVisible} showAnswers={showAnswers}>
+      <QuizCardSection
+        ref={domNode}
+        {...{
+          ...props,
+          showAnswers,
+          value,
+          correctChoiceIndex,
+          answered,
+          onMouseLeave: handleOnMouseLeave,
+          onMouseEnter: handleOnMouseEnter,
+          onClick: handleClick,
+          cardNumber,
+          isActive,
+          isVisible,
+        }}
+      >
+        <QuizCardContent>{children}</QuizCardContent>
+      </QuizCardSection>
+    </QuizItemSpacer>
   );
 };
 

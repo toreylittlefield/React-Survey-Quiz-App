@@ -3,13 +3,13 @@ import QuizItemCard from './QuizItemCard';
 import styled from 'styled-components';
 
 const QuizItemsContainer = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center; */
   display: grid;
-  grid-gap: 2em;
+  width: 100%;
+  /* grid-gap: ${({ progress }) => (progress ? `0em` : `2em`)}; */
   place-items: center;
+  @media (max-width: 480px) {
+    /* grid-gap: ${({ progress }) => (progress ? `0em` : `3.5em`)}; */
+  }
 `;
 
 const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
@@ -22,9 +22,18 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
       behavior: 'smooth',
     });
   };
-  const { choicesSelected = [{ key: '' }], showAnswers = false } = props;
+  const {
+    choicesSelected = [{ key: '' }],
+    showAnswers = false,
+    progress,
+  } = props;
+
+  console.log({ progress: progress.length, quizLength: quizQuestions.length });
   return (
-    <QuizItemsContainer id="wrapper">
+    <QuizItemsContainer
+      progress={!showAnswers && progress.length === quizQuestions.length}
+      id="wrapper"
+    >
       {quizQuestions.map((quizQuestion = {}, quizIdx) => {
         const { id, word, correctChoiceIndex } = quizQuestion;
         const childrenwithprops = Children.map(children, (element) =>
@@ -34,7 +43,7 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
         );
         return (
           <QuizItemCard
-            ref={itemsRef[quizIdx]}
+            // ref={itemsRef[quizIdx]}
             key={id + correctChoiceIndex}
             onClick={() => handleShow(quizIdx)}
             choiceSelected={Object.entries(choicesSelected[quizIdx]).flat(2)}
