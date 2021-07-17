@@ -39,18 +39,17 @@ const CustomButton = styled.button`
   --color-primary-darker: hsl(var(--color), calc(var(--l) - 5%));
   --color-primary-darkest: hsl(var(--color), calc(var(--l) - 10%));
 
-  font-size: 2rem;
+  font-size: 2em;
   display: inline-block;
   cursor: pointer;
   text-decoration: none;
-  margin: 2rem 0 2rem 0;
+  margin: 2em 0 2em 0;
   padding: 0.25em 1em;
   border-radius: 0.25em;
   position: relative;
   background: ${({ buttonColor }) =>
     buttonColor ? buttonColor : `var(--color-primary);`};
   color: var(--font-color);
-  cursor: pointer;
   :hover,
   :focus {
     background: var(--color-primary-darker);
