@@ -6,6 +6,7 @@ const RadioLabelText = styled.span`
   transition: 180ms all ease-in-out;
   opacity: 0.85;
   cursor: pointer;
+  width: max-content;
 `;
 
 const RadioController = styled.span`
@@ -32,8 +33,12 @@ const showAnswerBackground = css`
   }}
 `;
 const showSelected = css`
-  ${({ showAnswers, isSelected, isAnswer, theme }) => {
-    if (!showAnswers) return;
+  ${({ showAnswers, isSelected, isAnswer }) => {
+    if (!showAnswers) {
+      return css`
+        width: max-content;
+      `;
+    }
     const selected = isSelected;
     if (!isAnswer && selected) {
       return css`
