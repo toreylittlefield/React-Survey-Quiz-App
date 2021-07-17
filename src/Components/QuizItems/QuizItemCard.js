@@ -151,7 +151,10 @@ const QuizCardSection = styled.section`
     return `var(--bg-color)`; //theme.primaryFontColor;
   }};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
-  transition: all 0.35s ease;
+  transition: all 0.6s ease;
+  @media (max-width: 480px) {
+    transition: all 0.35s ease;
+  }
   border-radius: var(--border-radius);
   ${({ answered }) =>
     answered === false ? notYetAnsweredStyles : answeredStyles};

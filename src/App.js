@@ -101,6 +101,7 @@ function App() {
             <Button
               disabled={!data.length || showAnswers}
               onClick={() => setShowAnswers(true)}
+              onPointerEnd={() => setShowAnswers(true)}
               hideButton={showAnswers}
             >
               Submit
