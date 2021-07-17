@@ -65,6 +65,7 @@ function App() {
     showAnswers,
     setNumberCorrectAnswers,
     numCorrectAnswers,
+    progress,
     setProgress,
     choicesSelected,
     setchoicesSelected,
