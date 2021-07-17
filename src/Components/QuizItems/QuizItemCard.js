@@ -20,7 +20,10 @@ const selectedChoiceTransition = css`
 const QuizItemSpacer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 2em;
+
+  :not(:first-of-type) {
+    margin-top: 2em;
+  }
   margin-bottom: -2em;
   width: 100%;
   ${({ showAnswers, isVisible }) => {
