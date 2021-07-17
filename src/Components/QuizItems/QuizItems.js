@@ -14,9 +14,11 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
     useRef()
   );
   const handleShow = (i) => {
-    itemsRef[i + 1].current.scrollIntoView({
-      behavior: 'smooth',
-    });
+    setTimeout(() => {
+      itemsRef[i + 1].current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }, 400);
   };
   const { choicesSelected = [{ key: '' }], showAnswers = false } = props;
 
