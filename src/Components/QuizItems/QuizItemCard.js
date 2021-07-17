@@ -7,6 +7,7 @@ const selectedChoiceTransition = css`
   transform: ${({ cardNumber }) =>
     cardNumber % 2 === 1 ? `scale(0.1)` : `scale(0.1)`};
   opacity: 0;
+  pointer-events: none;
   visibility: hidden;
   font-size: 0;
   padding: 0;
@@ -89,7 +90,8 @@ const hoverDefault = css`
 `;
 
 const hoverCSS = css`
-  :hover {
+  :hover,
+  :active {
     ${hoverDefault}
 
     ::before {
