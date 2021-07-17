@@ -57,8 +57,8 @@ const hoverDefault = css`
   @media (max-width: 480px) {
     font-size: 1.75rem;
     & label {
-      padding: 0.5em 0em;
-      font-size: 1.75rem;
+      padding: 0.2em 0em;
+      font-size: 1.6rem;
       transition: all 50ms linear 50ms;
     }
   }

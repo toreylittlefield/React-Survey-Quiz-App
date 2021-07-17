@@ -45,8 +45,8 @@ const showSelected = css`
 const CustomLabel = styled.label`
   ${showAnswerBackground};
   ${showSelected};
-  padding: 0.5em;
-  margin: 0.5em;
+  padding: 0.25em;
+  margin: 0.25em;
   display: grid;
   grid-template-columns: min-content auto;
   grid-gap: 0.5em;
