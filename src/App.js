@@ -101,7 +101,10 @@ function App() {
             <Button
               disabled={!data.length || showAnswers}
               onClick={() => setShowAnswers(true)}
-              onPointerDown={() => setShowAnswers(true)}
+              onPointerDown={(event) => {
+                event.stopPropagation();
+                setShowAnswers();
+              }}
               hideButton={showAnswers}
             >
               Submit
