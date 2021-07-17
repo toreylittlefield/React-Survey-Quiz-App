@@ -55,11 +55,11 @@ const hoverDefault = css`
   font-size: 1.5rem;
   line-height: 2.5rem;
   @media (max-width: 480px) {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     & label {
-      font-size: 1.3em;
-      padding: 0em;
-      transition: font-size 50ms linear 50ms;
+      padding: 0.1em 0em;
+      font-size: 1rem;
+      transition: all 50ms linear 50ms;
     }
   }
 `;
@@ -114,9 +114,9 @@ const QuizCardSection = styled.section`
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
   margin-bottom: 2em;
+  border-radius: var(--border-radius);
   ${({ answered }) =>
     answered === false ? notYetAnsweredStyles : answeredStyles};
-  border-radius: var(--border-radius);
 
   section :last-child {
     margin-bottom: 10em;
