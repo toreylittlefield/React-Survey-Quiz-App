@@ -28,7 +28,6 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
     progress,
   } = props;
 
-  console.log({ progress: progress.length, quizLength: quizQuestions.length });
   return (
     <QuizItemsContainer
       progress={!showAnswers && progress.length === quizQuestions.length}
