@@ -5,6 +5,7 @@ const RadioLabelText = styled.span`
   line-height: 1;
   transition: 180ms all ease-in-out;
   opacity: 0.85;
+  cursor: pointer;
 `;
 
 const RadioController = styled.span`
@@ -14,6 +15,7 @@ const RadioController = styled.span`
   border-radius: 50%;
   border: 0.1em solid currentcolor;
   transform: translateY(0.2em);
+  cursor: pointer;
 `;
 
 const showAnswerBackground = css`
@@ -68,6 +70,7 @@ const CustomLabel = styled.label`
 `;
 
 const CustomInput = styled.input`
+  cursor: none;
   opacity: 0;
   width: 0;
   height: 0;

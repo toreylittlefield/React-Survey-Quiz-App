@@ -117,7 +117,7 @@ const QuizCardSection = styled.section`
   position: relative;
   display: flex;
   justify-content: center;
-  cursor: pointer;
+  /* cursor: pointer; */
   width: 50vw;
   max-width: 80%;
   padding: 1.5em 0em 1em 0em;
