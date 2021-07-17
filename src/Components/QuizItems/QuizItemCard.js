@@ -263,7 +263,8 @@ const QuizItemCard = ({
   const handleClick = (e) => {
     if (!key || showAnswers) return;
     if (!isActiveElement && e) {
-      e.preventDefault();
+      e.stopPropagation();
+      // e.preventDefault();
       return setIsActiveElement(true);
     }
     if (value && answered) setIsActiveElement(true);
