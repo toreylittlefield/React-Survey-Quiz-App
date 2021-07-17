@@ -33,7 +33,6 @@ const showSelected = css`
   ${({ showAnswers, isSelected, isAnswer, theme }) => {
     if (!showAnswers) return;
     const selected = isSelected;
-    console.log({ selected });
     if (!isAnswer && selected) {
       return css`
         border: 1px double currentColor;

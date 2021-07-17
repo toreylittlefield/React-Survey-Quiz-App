@@ -127,7 +127,7 @@ const QuizCardSection = styled.section`
   }};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.35s ease;
-  margin-bottom: 2em;
+  /* margin-bottom: 2em; */
   border-radius: var(--border-radius);
   ${({ answered }) =>
     answered === false ? notYetAnsweredStyles : answeredStyles};
@@ -212,8 +212,6 @@ const QuizItemCard = ({
   const [key, value] = choiceSelected;
 
   useEffect(() => {
-    // console.log({ isActiveElement, answered, value, isVisible });
-
     if (answered && value !== null) {
       SetisVisible(false);
     }

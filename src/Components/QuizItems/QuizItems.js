@@ -1,5 +1,16 @@
 import React, { Children, cloneElement, useRef } from 'react';
 import QuizItemCard from './QuizItemCard';
+import styled from 'styled-components';
+
+const QuizItemsContainer = styled.div`
+  /* display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center; */
+  display: grid;
+  grid-gap: 2em;
+  place-items: center;
+`;
 
 const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
   const itemsRef = Array.from({ length: quizQuestions.length + 1 }, () =>
@@ -13,7 +24,7 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
   };
   const { choicesSelected = [{ key: '' }], showAnswers = false } = props;
   return (
-    <React.Fragment>
+    <QuizItemsContainer id="wrapper">
       {quizQuestions.map((quizQuestion = {}, quizIdx) => {
         const { id, word, correctChoiceIndex } = quizQuestion;
         const childrenwithprops = Children.map(children, (element) =>
@@ -42,7 +53,7 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
         style={{ visibility: 'hidden' }}
         ref={itemsRef[itemsRef.length - 1]}
       ></div>
-    </React.Fragment>
+    </QuizItemsContainer>
   );
 };
 
