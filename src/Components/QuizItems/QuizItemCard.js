@@ -97,6 +97,20 @@ const QuizCardSection = styled.section`
   width: 50vw;
   max-width: 80%;
   padding: 1.5em 0em 1em 0em;
+  @media (max-width: 480px) {
+    ${({ showAnswers }) => {
+      if (!showAnswers) return;
+      return css`
+      width: 70vw;
+      font-size: 1.2rem;
+      & label {
+        padding: 0.3em 0.3em;
+        font-size: 1.1rem;
+        transition: all 50ms linear 50ms;
+      } 
+    }`;
+    }}
+  }
   background: ${({
     theme,
     value,
