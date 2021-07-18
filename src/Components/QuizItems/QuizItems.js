@@ -13,7 +13,9 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useRef()
   );
+
   const handleShow = (i) => {
+    console.log({ itemsRef, ref: itemsRef[i + 1] });
     setTimeout(() => {
       itemsRef[i + 1].current.scrollIntoView({
         behavior: 'smooth',
@@ -35,7 +37,10 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
           <QuizItemCard
             // ref={itemsRef[quizIdx]}
             key={id + correctChoiceIndex}
-            onClick={() => handleShow(quizIdx)}
+            onClick={(e) => {
+              console.log({ target: e.target });
+              handleShow(quizIdx);
+            }}
             choiceSelected={Object.entries(choicesSelected[quizIdx]).flat(2)}
             cardNumber={quizIdx}
             correctChoiceIndex={correctChoiceIndex}

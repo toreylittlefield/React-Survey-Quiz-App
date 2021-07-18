@@ -4,18 +4,15 @@ import styled, { css } from 'styled-components';
 import useClickOutside from '../../Hooks/useClickOutside';
 
 const selectedChoiceTransition = css`
-  transform: ${({ cardNumber }) =>
-    cardNumber % 2 === 1 ? `scale(0.1)` : `scale(0.1)`};
-  opacity: 0;
+  transform: scale(0.1);
   pointer-events: none;
+  opacity: 0;
   visibility: hidden;
   font-size: 0;
   padding: 0;
   margin: 0;
-  transition-timing-function: ease;
-  transition-property: transform, opacity, visibility, font-size, padding,
-    margin;
-  transition-duration: 600ms, 500ms, 500ms, 500ms, 500ms, 500ms;
+  transition: transform 600ms linear, width 0s, opacity 0s 600ms,
+    visibility 0s ease 600ms, font-size 200ms linear 400ms;
 `;
 
 const QuizItemSpacer = styled.div`
@@ -35,8 +32,6 @@ const QuizItemSpacer = styled.div`
         margin-top: 0em;
         margin-bottom: 0em;
         visibility: hidden;
-        /* width: 0; */
-        /* transition: all 600ms linear; */
       `;
     }
   }}
@@ -48,7 +43,6 @@ const correctChoiceSelected = css`
 
 const notCorrectChoiceSelected = css`
   color: ${({ theme }) => theme.rejectColor[3]};
-  /* background-color: ${({ theme }) => theme.rejectColor[0]}; */
 `;
 
 const answeredStyles = css`
@@ -80,11 +74,8 @@ const hoverDefault = css`
   font-size: 1.5rem;
   line-height: 2.5rem;
   @media (max-width: 480px) {
-    /* font-size: 1.75rem; */
     & label {
       padding: 0.5em 0em;
-      font-size: 1.5rem;
-      transition: all 50ms linear 50ms;
     }
   }
 `;
@@ -119,7 +110,6 @@ const QuizCardSection = styled.section`
   position: relative;
   display: flex;
   justify-content: center;
-  /* cursor: pointer; */
   width: 50vw;
   max-width: 80%;
   padding: 1.5em 0em 1em 0em;
@@ -133,18 +123,11 @@ const QuizCardSection = styled.section`
       & label {
         padding: 0.3em 0.3em;
         font-size: 1.1rem;
-        /* transition: all 2s linear 50ms; */
       } 
     }`;
     }}
   }
-  background: ${({
-    theme,
-    value,
-    correctChoiceIndex,
-    isVisible,
-    showAnswers,
-  }) => {
+  background: ${({ value, correctChoiceIndex, isVisible, showAnswers }) => {
     if (isVisible && !showAnswers) {
       if (value === null) return `var(--bg-color)`;
       return `var(--alt-bg-color)`;
@@ -153,17 +136,10 @@ const QuizCardSection = styled.section`
     return `var(--bg-color)`; //theme.primaryFontColor;
   }};
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
-  transition: all 0.6s ease;
-  @media (max-width: 480px) {
-    transition: all 750ms ease-in;
-  }
+  transition: all 0.4s linear 150ms;
   border-radius: var(--border-radius);
   ${({ answered }) =>
     answered === false ? notYetAnsweredStyles : answeredStyles};
-
-  /* section :last-child {
-    margin-bottom: 10em;
-  } */
 
   ::before,
   ::after {
@@ -264,7 +240,7 @@ const QuizItemCard = ({
     if (!key || showAnswers) return;
     if (!isActiveElement && e) {
       e.stopPropagation();
-      // e.preventDefault();
+
       return setIsActiveElement(true);
     }
     if (value && answered) setIsActiveElement(true);

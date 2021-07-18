@@ -99,7 +99,11 @@ function App() {
 
             {/* Submit Button */}
             <Button
-              disabled={!data.length || showAnswers}
+              disabled={
+                !data.length ||
+                showAnswers ||
+                progress.length !== quizQuestions.length
+              }
               onClick={() => setShowAnswers(true)}
               onPointerDown={(event) => {
                 event.stopPropagation();
