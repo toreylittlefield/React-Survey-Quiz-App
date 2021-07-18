@@ -12,7 +12,7 @@ const selectedChoiceTransition = css`
   font-size: 0;
   padding: 0;
   margin: 0;
-  transition-timing-function: linear;
+  transition-timing-function: ease;
   transition-property: transform, opacity, visibility, font-size, padding,
     margin;
   transition-duration: 600ms, 500ms, 500ms, 500ms, 500ms, 500ms;
@@ -133,7 +133,7 @@ const QuizCardSection = styled.section`
       & label {
         padding: 0.3em 0.3em;
         font-size: 1.1rem;
-        transition: all 50ms linear 50ms;
+        /* transition: all 2s linear 50ms; */
       } 
     }`;
     }}
@@ -155,7 +155,7 @@ const QuizCardSection = styled.section`
   box-shadow: 0px 0px 6px 0px var(--boxShadowLight);
   transition: all 0.6s ease;
   @media (max-width: 480px) {
-    transition: all 0.35s ease;
+    transition: all 750ms ease-in;
   }
   border-radius: var(--border-radius);
   ${({ answered }) =>
