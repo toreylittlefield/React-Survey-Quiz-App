@@ -326,7 +326,10 @@ const QuizItemCard = ({
             fontSize="1.5rem"
             margin="1em 0em"
             hideButton={
-              value === null || (!isVisible && answered) || showAnswers
+              showAnswers ||
+              !isActiveElement ||
+              value === null ||
+              (!isVisible && answered)
             }
           >
             Submit Choice
