@@ -296,8 +296,10 @@ const QuizItemCard = ({
   };
 
   const handleSubmitChoice = () => {
-    setAnswered(true);
-    setIsActiveElement(false);
+    setTimeout(() => {
+      setAnswered(true);
+      setIsActiveElement(false);
+    }, 200);
   };
 
   return (

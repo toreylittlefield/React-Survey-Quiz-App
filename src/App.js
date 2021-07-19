@@ -104,7 +104,11 @@ function App() {
                 showAnswers ||
                 progress.length !== quizQuestions.length
               }
-              onClick={() => setShowAnswers(true)}
+              onClick={() =>
+                setTimeout(() => {
+                  setShowAnswers(true);
+                }, 200)
+              }
               onPointerDown={(event) => {
                 event.stopPropagation();
                 setShowAnswers();
