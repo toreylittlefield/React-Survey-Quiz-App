@@ -39,7 +39,7 @@ const CustomButton = styled.button`
   --color-primary-darker: hsl(var(--color), calc(var(--l) - 5%));
   --color-primary-darkest: hsl(var(--color), calc(var(--l) - 10%));
 
-  font-size: 2em;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '2em')};
   display: inline-block;
   cursor: pointer;
   text-decoration: none;
