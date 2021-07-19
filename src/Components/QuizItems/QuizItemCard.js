@@ -286,7 +286,7 @@ const QuizItemCard = ({
     if (!key || showAnswers) return;
     if (isActive && cardNumber === 0) setActive(false);
     if (isActiveElement) setIsActiveElement(false);
-    if (value !== null && answered === false) setAnswered(true);
+    // if (value !== null && answered === false) setAnswered(true);
   };
 
   const handleOnMouseEnter = () => {
