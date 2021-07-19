@@ -78,11 +78,11 @@ const hoverDefault = css`
   transform: scale(1);
   font-size: 1.5rem;
   line-height: 2.5rem;
-  @media (max-width: 480px) {
+  /* @media (max-width: 480px) {
     & label {
       padding: 0.5em 0em;
     }
-  }
+  } */
 `;
 
 const hoverCSS = css`
@@ -136,9 +136,13 @@ const QuizCardSection = styled.section`
   max-width: 80%;
   padding: 1.5em 0em 1em 0em;
   margin-bottom: 2em;
-  @media (max-width: 480px) {
-    ${({ showAnswers }) => {
-      if (!showAnswers) return;
+  /* @media (max-width: 480px) { */
+  ${
+    ({ showAnswers }) => {
+      if (!showAnswers)
+        return css`
+          width: 50vw;
+        `;
       return css`
       width: 70vw;
       font-size: 1.2rem;
@@ -147,7 +151,8 @@ const QuizCardSection = styled.section`
         font-size: 1.1rem;
       } 
     }`;
-    }}
+    }
+    // }
   }
   background: ${({ value, correctChoiceIndex, isVisible, showAnswers }) => {
     if (isVisible && !showAnswers) {
@@ -318,7 +323,8 @@ const QuizItemCard = ({
           <Button
             onClick={handleSubmitChoice}
             color="white"
-            fontSize="1.25em"
+            fontSize="1.5rem"
+            margin="1em 0em"
             hideButton={
               value === null || (!isVisible && answered) || showAnswers
             }
