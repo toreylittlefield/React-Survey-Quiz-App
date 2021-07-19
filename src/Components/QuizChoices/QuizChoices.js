@@ -60,6 +60,7 @@ const CustomLabel = styled.label`
     margin-right: 0em;
     padding-left: 0.25em;
     padding-right: 0em;
+    font-size: 0.8em;
   }
   &:focus-within {
     ${RadioLabelText} {
