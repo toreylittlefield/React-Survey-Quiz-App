@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
 const useFetch = () => {
-  const url =
-    'https://gist.githubusercontent.com/ttoomey/c8b14270e076165a97ff0f4e3ee251d3/raw/764f2b94c8714ed34f2c9c4d40c433a3fdca8c60/questions.json';
+  const url = `https://gist.githubusercontent.com/toreylittlefield/9a267a75aa8193abd339c20191a137ad/raw/0dc30b0b13ec5bac8c523a88808bfa306f1c74d9/gistfile1.json`;
+  // const url =
+  //   'https://gist.githubusercontent.com/ttoomey/c8b14270e076165a97ff0f4e3ee251d3/raw/764f2b94c8714ed34f2c9c4d40c433a3fdca8c60/questions.json';
   useEffect(() => {
     const wrapper = async () => {
       try {
@@ -28,7 +29,7 @@ const useFetch = () => {
       }
     };
     wrapper();
-  }, []);
+  }, [url]);
 
   const [data, setData] = useState([]);
   const [status, setStatus] = useState({
