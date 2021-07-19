@@ -1,6 +1,6 @@
 import React, { Children, cloneElement } from 'react';
 import QuizItemCard from './QuizItemCard';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const QuizItemsContainer = styled.div`
   display: grid;
@@ -9,6 +9,17 @@ const QuizItemsContainer = styled.div`
   transform-style: preserve-3d;
   perspective: 1500px;
   backface-visibility: hidden;
+`;
+
+const QuizQuestionH2 = styled.h2`
+  @media (max-width: 480px) {
+    ${({ wordLength }) => {
+      return css`
+        font-size: calc(140% - ${wordLength}%);
+      `;
+    }};
+  }
+  /* font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300))); */
 `;
 
 const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
@@ -54,7 +65,7 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
             showAnswers={showAnswers}
           >
             {/* ref={itemsRef[quizIdx]} */}
-            <h2>{word}</h2>
+            <QuizQuestionH2 wordLength={word.length}>{word}</QuizQuestionH2>
             {/* Quiz Questions */}
             {childrenwithprops}
             {/* End Quiz Questions */}
