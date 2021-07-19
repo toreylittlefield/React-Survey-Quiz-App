@@ -325,6 +325,7 @@ const QuizItemCard = ({
             color="white"
             fontSize="1.5rem"
             margin="1em 0em"
+            animated
             hideButton={
               showAnswers ||
               !isActiveElement ||
