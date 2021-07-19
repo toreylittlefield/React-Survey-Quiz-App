@@ -110,8 +110,11 @@ function App() {
                 setShowAnswers();
               }}
               hideButton={showAnswers}
+              disabledColor="alternate"
             >
-              Submit
+              {progress.length >= quizQuestions.length
+                ? 'Submit'
+                : `Questions Left: ${quizQuestions.length - progress.length}`}
             </Button>
 
             {/* Button To Clear & Try Again */}

@@ -8,9 +8,8 @@ const cssVarsForColor = (hs, l, fontColor) => css`
 `;
 
 const CustomButton = styled.button`
-  /* --clr-color: #b64965;
-  --clr-bg: #c56d84; */
-  ${({ color = '', theme }) => {
+  ${({ color = '', disabledColor = '', disabled = false, theme }) => {
+    if (disabled && disabledColor) color = disabledColor;
     if (color === 'alternate') {
       const { h, s, l } = theme.alternateButtonColor;
       const hs = `${h},${s}`;
@@ -42,6 +41,7 @@ const CustomButton = styled.button`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : '2em')};
   display: inline-block;
   cursor: pointer;
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : '')};
   text-decoration: none;
   margin: ${({ margin }) =>
     margin
