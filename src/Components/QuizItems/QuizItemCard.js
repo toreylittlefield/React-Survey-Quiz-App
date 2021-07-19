@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import useClickOutside from '../../Hooks/useClickOutside';
+import Button from '../Button/Button';
 
 const selectedChoiceTransition = css`
   transform: scale(0.1);
@@ -64,6 +65,10 @@ const notYetAnsweredStyles = css`
 
 const hoverDefault = css`
   width: 90vw;
+  /**
+  for 3D cards
+  transform: rotateX(0) translateZ(0) scaleY(0);
+   */
   box-shadow: 0px 10px 20px 0px var(--boxShadowLight);
   opacity: 1;
   border-radius: var(--border-radius);
@@ -106,6 +111,23 @@ const QuizCardSection = styled.section`
   --alt-bg-color: ${({ theme }) => theme.secondaryBgColor};
   --border-radius: 15px;
   --border-height: 4px;
+
+  /**
+  for 3D cards
+  ${({ cardNumber }) => {
+    if (cardNumber === 0) {
+      return css`
+        transform: rotateX(35deg) translateZ(-50px);
+        box-shadow: 0px 5px 10px 0px var(--boxShadowLight);
+      `;
+    }
+    if (cardNumber === 2)
+      return css`
+        transform: rotateX(-35deg) translateZ(-80px);
+        box-shadow: 0px -5px 10px 0px var(--boxShadowLight);
+      `;
+  }}
+  */
 
   position: relative;
   display: flex;
@@ -213,12 +235,12 @@ const QuizItemCard = ({
   const [isActiveElement, setIsActiveElement] = useState(
     defaultState.isActiveElement
   );
-  const [isVisible, SetisVisible] = useState(defaultState.isVisible);
+  const [isVisible, setIsVisible] = useState(defaultState.isVisible);
   const [key, value] = choiceSelected;
 
   useEffect(() => {
     if (answered && value !== null) {
-      SetisVisible(false);
+      setIsVisible(false);
     }
   }, [answered, value]);
 
@@ -228,7 +250,7 @@ const QuizItemCard = ({
       setAnswered(defaultState.answered),
       setActive(defaultState.isActive),
       setIsActiveElement(defaultState.isActiveElement),
-      SetisVisible(defaultState.isVisible),
+      setIsVisible(defaultState.isVisible),
       3000
     );
     return () => clearTimeout(timer);
@@ -238,6 +260,8 @@ const QuizItemCard = ({
 
   const handleClick = (e) => {
     if (!key || showAnswers) return;
+    // if button submit answer click exit
+    if (e.target?.value === '') return;
     if (!isActiveElement && e) {
       e.stopPropagation();
 
@@ -266,6 +290,11 @@ const QuizItemCard = ({
     if (value !== null && answered) setAnswered(false);
   };
 
+  const handleSubmitChoice = () => {
+    setAnswered(true);
+    setIsActiveElement(false);
+  };
+
   return (
     <QuizItemSpacer isVisible={isVisible} showAnswers={showAnswers}>
       <QuizCardSection
@@ -284,7 +313,19 @@ const QuizItemCard = ({
           isVisible,
         }}
       >
-        <QuizCardContent>{children}</QuizCardContent>
+        <QuizCardContent>
+          {children}
+          <Button
+            onClick={handleSubmitChoice}
+            color="white"
+            fontSize="1.25em"
+            hideButton={
+              value === null || (!isVisible && answered) || showAnswers
+            }
+          >
+            Submit Choice
+          </Button>
+        </QuizCardContent>
       </QuizCardSection>
     </QuizItemSpacer>
   );
