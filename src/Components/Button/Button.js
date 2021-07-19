@@ -43,7 +43,12 @@ const CustomButton = styled.button`
   display: inline-block;
   cursor: pointer;
   text-decoration: none;
-  margin: 2em 0 2em 0;
+  margin: ${({ margin }) =>
+    margin
+      ? css`
+          ${margin}
+        `
+      : `2em 0em 2em 0em`};
   padding: 0.25em 1em;
   border-radius: 0.25em;
   position: relative;
