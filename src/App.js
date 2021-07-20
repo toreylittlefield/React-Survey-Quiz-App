@@ -149,7 +149,7 @@ function App() {
                       const quizId = Object.keys(quiz);
                       const userAnswer = quiz[quizId];
                       return (
-                        <li key={quizId}>
+                        <li key={quizId + questionNum + userAnswer}>
                           <h4>
                             {`Your answer to question ${questionNum + 1}: ${
                               quizQuestions[questionNum].choices[userAnswer]
