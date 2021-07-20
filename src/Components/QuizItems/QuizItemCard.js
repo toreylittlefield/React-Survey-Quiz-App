@@ -4,6 +4,21 @@ import styled, { css } from 'styled-components';
 import useClickOutside from '../../Hooks/useClickOutside';
 import Button from '../Button/Button';
 
+const QuizQuestionH2 = styled.h2`
+  @media (max-width: 480px) {
+    ${({ wordLength, isActiveElement }) => {
+      if (!isActiveElement)
+        return css`
+          font-size: 1em;
+        `;
+      return css`
+        font-size: calc(150% - ${wordLength}%);
+      `;
+    }};
+  }
+  /* font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300))); */
+`;
+
 const selectedChoiceTransition = css`
   transform: scale(0.1);
   pointer-events: none;
@@ -78,11 +93,13 @@ const hoverDefault = css`
   transform: scale(1);
   font-size: 1.5rem;
   line-height: 2.5rem;
-  /* @media (max-width: 480px) {
+
+  @media (max-width: 480px) {
     & label {
       padding: 0.5em 0em;
+      /* font-size: rem; */
     }
-  } */
+  }
 `;
 
 const hoverCSS = css`
@@ -233,6 +250,7 @@ const QuizItemCard = ({
   correctChoiceIndex = -1,
   cardNumber = -1,
   showAnswers = false,
+  word = '',
   ...props
 }) => {
   const [answered, setAnswered] = useState(defaultState.answered);
@@ -321,6 +339,13 @@ const QuizItemCard = ({
         }}
       >
         <QuizCardContent>
+          {/* Card Title */}
+          <QuizQuestionH2
+            wordLength={word.length}
+            isActiveElement={isActiveElement}
+          >
+            {word}
+          </QuizQuestionH2>
           {children}
           <Button
             onClick={handleSubmitChoice}

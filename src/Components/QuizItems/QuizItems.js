@@ -1,45 +1,29 @@
 import React, { Children, cloneElement } from 'react';
 import QuizItemCard from './QuizItemCard';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const QuizItemsContainer = styled.div`
   display: grid;
   width: 100%;
   place-items: center;
-  transform-style: preserve-3d;
+  /* For 3D Cards */
+  /* transform-style: preserve-3d;
   perspective: 1500px;
-  backface-visibility: hidden;
+  backface-visibility: hidden; */
 `;
 
-const QuizQuestionH2 = styled.h2`
-  @media (max-width: 480px) {
-    ${({ wordLength }) => {
-      return css`
-        font-size: calc(140% - ${wordLength}%);
-      `;
-    }};
-  }
-  /* font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300))); */
-`;
+// const QuizQuestionH2 = styled.h2`
+//   @media (max-width: 480px) {
+//     ${({ wordLength }) => {
+//       return css`
+//         font-size: max(26px, calc(145% - ${wordLength}%));
+//       `;
+//     }};
+//   }
+//   /* font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300))); */
+// `;
 
 const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
-  // const itemsRef = memo(
-  //   () =>
-  //     Array.from({ length: quizQuestions.length + 1 }, () =>
-  //       // eslint-disable-next-line react-hooks/rules-of-hooks
-  //       useRef()
-  //     ),
-  //   [quizQuestions]
-  // );
-
-  // const handleShow = (i) => {
-  //   console.log({ itemsRef, ref: itemsRef[i + 1] });
-  //   setTimeout(() => {
-  //     itemsRef[i + 1].current.scrollIntoView({
-  //       behavior: 'smooth',
-  //     });
-  //   }, 400);
-  // };
   const { choicesSelected = [{ key: '' }], showAnswers = false } = props;
 
   return (
@@ -53,29 +37,19 @@ const QuizItems = ({ quizQuestions = [], children = [], ...props }) => {
         );
         return (
           <QuizItemCard
-            // ref={itemsRef[quizIdx]}
-            key={id + correctChoiceIndex}
-            // onClick={(e) => {
-            //   console.log({ target: e.target });
-            //   handleShow(quizIdx);
-            // }}
+            key={id + correctChoiceIndex + quizIdx}
             choiceSelected={Object.entries(choicesSelected[quizIdx]).flat(2)}
             cardNumber={quizIdx}
             correctChoiceIndex={correctChoiceIndex}
             showAnswers={showAnswers}
+            word={word}
           >
-            {/* ref={itemsRef[quizIdx]} */}
-            <QuizQuestionH2 wordLength={word.length}>{word}</QuizQuestionH2>
             {/* Quiz Questions */}
             {childrenwithprops}
             {/* End Quiz Questions */}
           </QuizItemCard>
         );
       })}
-      {/* <div
-        style={{ visibility: 'hidden' }}
-        ref={itemsRef[itemsRef.length - 1]}
-      ></div> */}
     </QuizItemsContainer>
   );
 };
